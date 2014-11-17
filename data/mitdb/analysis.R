@@ -1,6 +1,9 @@
 
 ###set working directory and read in mitdb data record 100
-setwd("c:/users/kristan/documents/github/trelliscope/data/mitdb")
+### setwd("c:/users/kristan/documents/github/trelliscope/data/mitdb")
+
+require(devtools)
+install_github('rCharts', 'ramnathv')
 r100 <- read.csv("100/100.csv", stringsAsFactors=FALSE, quote="'", header=FALSE, skip=2)
 names(r100) <- c("ElapsedTime", "MLII", "V5")
 
