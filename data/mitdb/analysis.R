@@ -9,6 +9,7 @@ head(r100)
 a100 <- read.fwf("100/100ann.txt", stringsAsFactors=FALSE, header=FALSE, widths=c(12,9,7,5,5,4), col.names=c("ElapsedTime", "Sample", "Type", "Sub", "Chan", "Num"), strip.white=TRUE)
 a100 <- a100[-1,]
 head(a100)
+a100$ETime <- strptime(a100$ElapsedTime, format="%M:%OS")
 
 
 r100$ETime <- strptime(r100$ElapsedTime, format="%M:%OS")
@@ -18,6 +19,11 @@ head(r100)
 r100$Minutes <- as.numeric(format(r100$ETime, "%M"))
 r100$Seconds <- as.numeric(format(r100$ETime, "%OS"))+(r100$Minutes*60)
 r100$TenSecond <- floor(r100$Seconds/10)
+
+
+a100$Minutes <- as.numeric(format(a100$ETime, "%M"))
+a100$Seconds <- as.numeric(format(a100$ETime, "%OS"))+(a100$Minutes*60)
+a100$TenSecond <- floor(a100$Seconds/10)
 
 r100$AnnotationTime <- NA
 tmp <- as.numeric(a100$Sample)
@@ -33,26 +39,31 @@ r100$AnnotationNum[tmp] <- a100$Num
 
 ###############
 library(datadr); library(trelliscope)
-r100$TenSecond <- as.factor(r100$TenSecond)
-r100 <- r100[,-4]
-byMin <- divide(r100, by = c("TenSecond"), update = TRUE)
+r100$TenSecond <- factor(r100$TenSecond, levels=sort(unique(r100$TenSecond)))
+library(reshape2)
+
+r100l <- melt(r100[,c("Seconds","TenSecond","MLII","V5")], id.vars=c("Seconds", "TenSecond"))
+head(r100l)
+
+byMin <- divide(r100l, by = c("TenSecond"), update = TRUE)
 
 vdbConn("MITDBGraphs/vdb", autoYes = TRUE)
-heartCog <- function(x) { list(
-  meanMLII = cogMean(x$MLII),
-  RangeMLII = cogRange(x$MLII),
-  nObs = cog(sum(!is.na(x$MLII)), 
+heartCog <- function(x) {list(
+  meanMLII = cogMean(x$value[x$variable=="MLII"]),
+  RangeMLII = cogRange(x$value[x$variable=="MLII"]),
+  nObs = cog(sum(!is.na(x$value[x$variable=="MLII"])), 
              desc = "number of sensor readings"),
-  meanV5 = cogMean(x$V5),
-  RangeV5 = cogRange(x$V5)
+  meanV5 = cogMean(x$value[x$variable=="V5"]),
+  RangeV5 = cogRange(x$value[x$variable=="MLII"])
 )}
 heartCog(byMin[[1]][[2]])
 
 # make and test panel function
 timePanel <- function(x)
-  xyplot(MLII + V5 ~ Seconds,
+  xyplot(value ~ Seconds, group=variable,
          data = x, auto.key = TRUE, type="l")
 timePanel(byMin[[1]][[2]])
+
 
 ############################################
 #############################################
@@ -61,10 +72,9 @@ timePanel(byMin[[1]][[2]])
 #still working on these code pieces!
 
 library(rCharts)
+x <- byMin[[1]][[2]]
 timePanelhc <- function(x){
-  hp <- hPlot(MLII ~ Seconds, data = x, type='line', radius=0)
-  hp$series(data=list())
-  hp$colors(c("darkblue"))
+  hp <- hPlot(value ~ Seconds, group='variable', data = x, type='line', radius=0)
   hp
 }
 timePanelhc(byMin[[1]][[2]])
@@ -74,20 +84,10 @@ timePanelhc(byMin[[1]][[2]])
 makeDisplay(byMin,
             name = "ecg_by_ten_sec_interval",
             desc = "ECG Readings Viewed Per 10 Second Intervals",
-            panelFn = timePanel, cogFn = priceCog,
-            width = 400, height = 400,
-            lims = list(x = "same"))
+            panelFn = timePanelhc, cogFn = heartCog,
+            width = 400, height = 400)
 
 # view the display
 library(shiny)
-runApp("trelliscopeViewerAlacer", launch.browser=TRUE)
-
-timePanel <- function(x)
-  xyplot(medListPriceSqft + medSoldPriceSqft ~ time,
-         data = x, auto.key = TRUE, ylab = "$ / Sq. Ft.")
-timePanel(byCounty[[1]][[2]])
-timePanel <- function(x)
-  xyplot(medListPriceSqft + medSoldPriceSqft ~ time,
-         data = x, auto.key = TRUE, ylab = "$ / Sq. Ft.")
-timePanel(byCounty[[1]][[2]])
+runApp("../../inst/trelliscopeViewerAlacer", launch.browser=TRUE)
 
