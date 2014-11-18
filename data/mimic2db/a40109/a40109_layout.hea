@@ -1,0 +1,10 @@
+a40109_layout 6 125 0 16:36:51.552  06/12/2016
+~ 0 125/mV 10 0 -512 0 0 II
+~ 0 60/mV 9 0 -256 0 0 AVF
+~ 0 125/mV 8 0 -128 0 0 V
+~ 0 60/mV 14 0 -8192 0 0 MCL1
+~ 0 1.25(-100)/mmHg 8 0 -128 0 0 ABP
+~ 0 5(-100)/mmHg 9 0 -256 0 0 PAP
+# age:  75   sex:  M
+# see also mimic2db/a40109/a40109n (numerics)
+# see also mimic2cdb/s15924 (clinical data)
