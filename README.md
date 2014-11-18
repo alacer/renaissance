@@ -1,3 +1,19 @@
+# See the original Trelliscope README Below.  For the Alacer Trelliscope version, the change includes the following:
+
+Instead of running the command
+```
+view()
+```
+following set up of displays, run the following commands:
+```
+library(shiny)
+runApp("inst/trelliscopeViewerAlacer", launch.browser=TRUE)
+```
+
+The command assumes that your working directory is the ~/trelliscope.  Change the runApp command as necessary to reflect the path.
+
+For an example, run the analaysis.R file in the data/mimic2db folder.
+
 # Trelliscope: Detailed Visualization of Large Complex Data in R
 
 Trelliscope is an R package to be used in conjunction with [datadr](https://github.com/tesseradata/datadr) and [RHIPE](https://github.com/tesseradata/RHIPE) to provide a framework for detailed visualization of large complex data.
