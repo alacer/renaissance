@@ -4,3 +4,7 @@ _ignore
 node_modules
 ..Rcheck
 *.sublime-*
+.Rproj.user
+.Rbuildignore
+vdb
+*.Rproj
