@@ -1,0 +1,9 @@
+a40076_layout 5 125 0 16:29:36.296  06/07/2012
+~ 0 105/mV 15 0 -16384 0 0 II
+~ 0 46/mV 14 0 -8192 0 0 AVF
+~ 0 46/mV 14 0 -8192 0 0 V
+~ 0 1.25(-100)/mmHg 9 0 -256 0 0 ABP
+~ 0 2.5(-100)/mmHg 10 0 -512 0 0 PAP
+# age:  68   sex:  M
+# see also mimic2db/a40076/a40076n (numerics)
+# see also mimic2cdb/s23015 (clinical data)
