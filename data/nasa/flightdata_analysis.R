@@ -31,6 +31,9 @@ biplot(pca)
 
 library(datadr)
 library(trelliscope)
+library(lattice)
+library(reshape2)
+library(dplyr)
 
 vdbConn("vdb", name="flightdata", autoYes = TRUE)
 
