@@ -1,9 +1,9 @@
-# setwd("~/apps/trelliscope/data/nasa")
+setwd("/Users/Live/repos/trelliscope")
 
-install.packages("devtools") 
+# install.packages("devtools") 
+# install_github("tesseradata/datadr")
+# install_github("tesseradata/trelliscope")
 library(devtools)
-install_github("tesseradata/datadr")
-install_github("tesseradata/trelliscope")
 library(datadr)
 library(trelliscope)
 library(lattice)
@@ -21,13 +21,21 @@ fan<-df[, c(
     'N1.4-FAN_SPEED_4_LSP')
     ]
 
-fan<-fan %>%
-    mutate(sequence=1:nrow(fan))
-
+fan$sequence <-1:nrow(fan)
 fan<-melt(fan, id='sequence')
-
 fan$variable<-as.factor(fan$variable)
-sample.rate <- 0.01
+
+
+numwindows <- 4
+windowsize <- max(fan$sequence)/numwindows
+fan$window <- 1
+for (i in 1:numwindows) {
+    fan[fan$sequence > i*windowsize, "window"] <- i+1
+}
+fan$window <- as.factor(fan$window)
+
+
+sample.rate <- 0.1
 sub <- fan[sample(nrow(fan), size = nrow(fan)* sample.rate) , ]
 sub <- sub[order(sub$variable, sub$sequence) , ]
 
@@ -37,7 +45,7 @@ bareBonesPanel <- function(x) {
     xyplot(value~sequence, data=x, type='l')
 }
 
-byEngine <- divide(sub, by = c("variable"))
+byEngine <- divide(sub, by = c("variable", "window"))
 
 makeDisplay(byEngine,
             panelFn = bareBonesPanel,
