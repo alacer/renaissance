@@ -1,5 +1,5 @@
 
-setwd("~/trelliscope/data/worldbank")
+setwd("c:/users/kristan/documents/github/trelliscope/data/worldbank")
 load("allcountryrisk.RData")
 
 library(shiny)
