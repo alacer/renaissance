@@ -135,7 +135,7 @@ makeDisplay(bySchoolGenderEthnicty,
 
 #use Alacer-Branded Trelliscope
 library(shiny)
-runApp("../../inst/TrelliscopeViewerAlacer")
+runApp("../../inst/TrelliscopeViewerAlacer", launch.browser=TRUE)
 
 
 
