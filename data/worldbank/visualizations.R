@@ -1,5 +1,5 @@
 
-setwd("c:/users/kristan/documents/github/trelliscope/data/worldbank")
+# setwd("c:/users/kristan/documents/github/trelliscope/data/worldbank")
 load("allcountryrisk.RData")
 
 library(shiny)
@@ -45,6 +45,9 @@ makeDisplay(byCountry,
             desc = "Country-Level Risk Ratings By Year, Testing Two Models",
             panelFn = timePanelhc, cogFn = CogFunctions,
             width = 400, height = 400)
+
+
+
 runApp("../../inst/trelliscopeViewerAlacer", 
   launch.browser=TRUE)
 
