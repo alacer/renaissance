@@ -129,6 +129,10 @@ function d3bivar(data, id) {
    var filterData = $("#univarFilterState").data("filterData");
    if(!filterData)
       filterData = {};
+
+   var filterData = $("#mapFilterState").data("filterData");
+   if(!filterData)
+      filterData = {};    
    
    var xFilter;
    activeXvar = $("#bivar-x-filter-select li.active");

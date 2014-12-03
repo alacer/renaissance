@@ -16,6 +16,7 @@ function hideColumn(columnIndex, name) {
    $("#cog-table-th-" + name).addClass("hidden");
    $("#cog-filter-td-" + name).addClass("hidden");
    $("#cog-table-univar-td-" + name).addClass("hidden");
+   $("#cog-table-map-td-" + name).addClass("hidden");   
 }
 
 function showColumn(columnIndex, name) {
@@ -24,6 +25,7 @@ function showColumn(columnIndex, name) {
    $("#cog-table-th-" + name).removeClass("hidden");
    $("#cog-filter-td-" + name).removeClass("hidden");
    $("#cog-table-univar-td-" + name).removeClass("hidden");
+   $("#cog-table-map-td-" + name).removeClass("hidden");   
 }
 
 function updateCogTableColumnVisibility() {

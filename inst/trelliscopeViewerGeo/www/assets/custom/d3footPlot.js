@@ -28,6 +28,16 @@ function d3footPlot(data) {
    if(plotType == "bar") {
       
    }
+
+   var svg = d3.select("#cog-table-map-" + name).append("svg:svg")
+      .attr("width", d3footHistWidth + d3footHistMargin.left + d3footHistMargin.right)
+      .attr("height", d3footHistHeight + d3footHistMargin.top + d3footHistMargin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + d3footHistMargin.left + "," + d3footHistMargin.top + ")");
+   
+   if(plotType == "bar") {
+      
+  }
    
    var delta = data[1].xdat - data[0].xdat;
    var xrange = d3.extent(data.map(function(d) { return d.xdat; }));

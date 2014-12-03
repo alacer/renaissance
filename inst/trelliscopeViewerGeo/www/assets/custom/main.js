@@ -334,6 +334,7 @@ function buttonToggleHandler() {
       if($(this).hasClass("btn-default")) {
          // save filter state
          univarFilterLocalSave();
+         mapFilterLocalSave();         
          // make it active
          $(this).removeClass("btn-default");
          $(this).addClass("btn-info");

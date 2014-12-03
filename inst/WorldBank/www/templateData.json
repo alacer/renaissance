@@ -70,23 +70,6 @@
 			"relatedDisplayListApplyButton"
 		]
 	},
-	"active-cog" : {
-		"icon" : [
-			"icon-active-cog"
-		],
-		"panel_header" : [
-			"Active Cognostics"
-		],
-		"panel_description" : [
-			"Specify which cognostics are available for sorting, filtering, and sampling."
-		],
-		"body_id" : [
-			"activeCogListOutput"
-		],
-		"apply_button" : [
-			"activeCogListApplyButton"
-		]
-	},
 	"cog-table-sort-filter" : {
 		"icon" : [
 			"icon-sort-filter"
@@ -104,6 +87,23 @@
 			"cogTableControlsApplyButton"
 		]
 	},
+	"geo-filter" : {
+		"icon" : [
+			"icon-earth"
+		],
+		"panel_header" : [
+			"Geographic Filter"
+		],
+		"panel_description" : [
+			"View and Filter panels based on geographic areas and other filter selections.  <br/>Select a variable to view and filter on the map."
+		],
+		"body_id" : [
+			"cogGeoFilterControlsOutput"
+		],
+		"apply_button" : [
+			"cogGeoFilterControlsApplyButton"
+		]
+	},	
 	"univar-filter" : {
 		"icon" : [
 			"icon-bars"
@@ -136,43 +136,6 @@
 		],
 		"apply_button" : [
 			"cogBiFilterControlsApplyButton"
-		]
-	},
-	"multivar-filter" : {
-		"icon" : [
-			"icon-multivar"
-		],
-		"panel_header" : [
-			"Visual Multivariate Filter"
-		],
-		"panel_description" : [
-			"Filter panels based on a two-dimensional projection pursuit of multiple quantitative cognostics.  <br/>This can help uncover interesting regions of the cognostics space."
-		],
-		"body_id" : [
-			"cogMultiFilterControlsOutput"
-		],
-		"apply_button" : [
-			"cogMultiFilterControlsApplyButton"
-		],
-		"footer" : [
-			"Note: this interactive filter is not yet bound to the back-end - panels will not update when you click 'Apply'..."
-		]
-	},
-	"sample-panels" : {
-		"icon" : [
-			"icon-sample"
-		],
-		"panel_header" : [
-			"Sample Panels"
-		],
-		"panel_description" : [
-			"Specify how to sample from panels in their current sorted and filtered state (coming soon)."
-		],
-		"body_id" : [
-			"cogSampleControlsOutput"
-		],
-		"updateButton" : [
-			"cogSampleControlsApplyButton"
 		]
 	}
 }

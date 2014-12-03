@@ -152,3 +152,7 @@
 .icon-file-pdf:before {
 	content: "\e60d";
 }
+
+.icon-earth:before {
+    content: "\e600";
+}

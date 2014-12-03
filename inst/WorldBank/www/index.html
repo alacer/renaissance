@@ -34,6 +34,17 @@
     
     <script src="assets/d3/d3.min.js"></script>
     <script src="assets/d3/vega.min.js"></script>
+
+    <!--Add in Script files for crosslet and dependencies-->
+    <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+    <script src="assets/leaflet/leaflet.js"></script>
+    <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/underscore/underscore-min.js"></script>
+    <script src="assets/d3/d3.v3.min.js"></script>
+    <script src="assets/backbone/backbone-min.js"></script>
+    <script src="assets/crosslet/crosslet-min.js"></script>
+
+    <!---------->    
     
     <script src="assets/custom/d3footPlot.js"></script>
     <script src="assets/custom/d3uniFilter.js"></script>
@@ -41,9 +52,9 @@
     <script src="assets/custom/controls-active-cog.js"></script>
     <script src="assets/custom/controls-related.js"></script>
     <script src="assets/custom/controls-cog-table.js"></script>
+    <script src="assets/custom/controls-geo-filter.js"></script>
     <script src="assets/custom/controls-univar-filter.js"></script>
     <script src="assets/custom/controls-bivar-filter.js"></script>
-    <script src="assets/custom/controls-multivar-filter.js"></script>
     <script src="assets/custom/controls-panel-labels.js"></script>
     <script src="assets/custom/controls-panel-layout.js"></script>
     <script src="assets/custom/main.js"></script>
@@ -127,12 +138,11 @@
               <span class="list-group-text">&nbsp;Related Displays</span>
             </a>
             <a href="javascript:" class="list-group-item active list-group-item-primary list-group-item-short">
-              <span class="list-group-header">Cognostics</span>
+              <span class="list-group-header">Filters</span>
             </a>
-            <a href="javascript:" class="list-group-item" data-divlink="active-cog" id="active-cog-nav-link">
-               <!-- data-action="cogTableSetFromExposedState"> -->
-              <i class="icon-active-cog"></i>
-              <span class="list-group-text">Active Cognostics</span>
+            <a href="javascript:" class="list-group-item" data-divlink="geo-filter" id="geo-filter-nav-link">
+              <i class="icon-earth"></i>
+              <span class="list-group-text">Geographic Filter</span>
             </a>
             <a href="javascript:" class="list-group-item" data-divlink="cog-table-sort-filter" id="cog-table-sort-filter-nav-link">
                <!-- data-action="cogTableSetFromExposedState"> -->
@@ -144,18 +154,10 @@
               <i class="icon-bars"></i>
               <span class="list-group-text">Univariate Filter</span>
             </a>
-            <a href="javascript:" class="list-group-item" data-divlink="bivar-filter" id="bivar-filter-nav-link">
+            <a href="javascript:" class="list-group-item last-item" data-divlink="bivar-filter" id="bivar-filter-nav-link">
                <!-- data-action="bivarFilterSetFromExposedState"> -->
               <i class="icon-stats"></i>
               <span class="list-group-text">Bivariate Filter</span>
-            </a>
-            <a href="javascript:" class="list-group-item" data-divlink="multivar-filter" id="multivar-filter-nav-link">
-              <i class="icon-multivar"></i>
-              <span class="list-group-text">Multivariate Filter</span>
-            </a>
-            <a href="javascript:" class="list-group-item last-item" data-divlink="sample-panels" id="sample-panels-nav-link">
-              <i class="icon-sample"></i>
-              <span class="list-group-text">Sample</span>
             </a>
           </div>
         </div>
@@ -163,12 +165,11 @@
         <div id="panel-function"        class="slide-panel panel panel-default"></div>
         <div id="panel-labels"          class="slide-panel panel panel-default"></div>
         <div id="add-related-display"   class="slide-panel panel panel-default"></div>
-        <div id="active-cog"            class="slide-panel panel panel-default"></div>
+        <div id="geo-filter"            class="slide-panel panel panel-default"></div>        
         <div id="cog-table-sort-filter" class="slide-panel panel panel-default"></div>
         <div id="univar-filter"         class="slide-panel panel panel-default"></div>
         <div id="bivar-filter"          class="slide-panel panel panel-default"></div>
-        <div id="multivar-filter"       class="slide-panel panel panel-default"></div>
-        <div id="sample-panels"         class="slide-panel panel panel-default"></div>
+
 
         <div class="shiny-template-output" id="panelTableContentOutput" data-post-render="panelTableContentOutputPostRender">
         </div>
@@ -348,12 +349,9 @@
                     <li><code>f</code> Open "Panel Function"</li>
                     <li><code>e</code> Open "Panel Labels"</li>
                     <li><code>r</code> Open "Related Displays"</li>
-                    <li><code>a</code> Open "Active Cognostics"</li>
                     <li><code>t</code> Open "Table Sort / Filter"</li>
                     <li><code>u</code> Open "Univariate Filter"</li>
                     <li><code>b</code> Open "Bivariate Filter"</li>
-                    <li><code>m</code> Open "Multivariate Filter"</li>
-                    <li><code>s</code> Open "Sample"</li>
                   </ul>
               
                   <h4>Inside a control panel</h4>
@@ -591,7 +589,8 @@
 </div>
 </script>
 
-<!-- active cognostics template -->
+
+  <!-- active cognostics template 
 <script id="activeCogListOutput-template" type="text/html">
 <div class="panel-body-wrapper">
   <div class="table-header-div">
@@ -623,6 +622,7 @@
   </div>
 </div>
 </script>
+ -->
 
 <!-- cog table sort filter template -->
 <script id="cogTableControlsOutput-template" type="text/html">
@@ -759,6 +759,35 @@
 {{/.}}
 </script>
 
+
+<!-- geo filter template -->
+<script id="cogGeoFilterControlsOutput-template" type="text/html">
+/*<div class="panel-body-wrapper">
+     <div class="relative-wrapper">
+    <div class="vis-filter-controls">
+      <p class="control-label">Variable to plot</p>
+   <div class="vis-filter-geo" id="geoFilterState">
+        <ul class="list-group filter-select shiny-my-data-input" id="geoFilterSelect">
+          {{#cogs}}
+          <li class="list-group-item" data-name="{{name}}" data-type="{{type}}" title="{{desc}}" id="geo-var-{{name}}">
+            <div class="geo-filter-var-name filter-list-name">{{name}}</div>
+            <span class="right-icon"><i class="icon-filter hidden"></i></span></li>
+          {{/cogs}}
+        </ul>
+      </div>
+*/
+
+      
+      console.log(config);
+      new crosslet.MapView($("#map"),config);
+     
+
+
+<!--   </div>
+  </div> 
+</div> -->
+</script>
+
 <!-- univariate filter template -->
 <script id="cogUniFilterControlsOutput-template" type="text/html">
 <div class="panel-body-wrapper">
@@ -842,44 +871,6 @@
 </div>
 </script>
 
-<!-- multivariate filter template -->
-<script id="cogMultiFilterControlsOutput-template" type="text/html">
-<div class="panel-body-wrapper">
-  <div class="relative-wrapper">
-    <div class="vis-filter-controls">
-      <p class="control-label">Variables to project</p>
-      <div class="vis-filter-multivar">
-        <ul class="list-group filter-select shiny-my-data-input" id="multivarFilterSelect">
-          {{#cogs}}
-          <li id="multivar-var-{{name}}" class="list-group-item selectable" data-desc="{{desc}}">{{name}}</li>
-          {{/cogs}}
-        </ul>
-      </div>
-      <p>
-      <button id="btn-multivar" type="button" class="btn btn-primary" disabled>Plot Projection</button>
-      </p>
-    </div>
-    <div class="vis-filter-plot empty-plot shiny-d3-output" id="multivarFilterPlot" data-d3-fn="d3bivar" data-callback="multivarFilterLocalLoad" data-spinner="multivarSpinner"></div>
-    <div id="multivar-dist-toggle">
-      <div class="btn-group" id="multivarDistType" data-action="updateMultivarPlot">
-        <button type="button" class="btn btn-info mc-toggle active" data-dist-type="conditional">Filtered</button>
-        <button type="button" class="btn btn-default mc-toggle" data-dist-type="marginal">All</button>
-      </div>
-    </div>
-    <div id="multivar-type-toggle">
-      <div class="btn-group" id="multivarPlotType" data-action="updateMultivarPlot">
-        <button type="button" class="btn btn-info mc-toggle active">Scatter</button>
-        <button type="button" class="btn btn-default mc-toggle">Hexbin</button>
-      </div>
-    </div>
-  </div>
-</div>
-</script>
-
-<!-- sample panels template -->
-<script id="cogSampleControlsOutput-template" type="text/html">
-  Coming soon...
-</script>
 
 <!-- cog state template -->
 <script id="cogBreadcrumbOutput-template" type="text/html">

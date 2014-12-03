@@ -36,9 +36,9 @@ var spinnerOptsCorner = {
   left: '50%' // Left position relative to parent
 };
 
+var geoSpinner = new Spinner(spinnerOpts);
 var univarSpinner = new Spinner(spinnerOpts);
 var bivarSpinner = new Spinner(spinnerOpts);
-var multivarSpinner = new Spinner(spinnerOpts);
 var panelSpinner = new Spinner(spinnerOptsCorner);
 var displayLoadSpinner = new Spinner(spinnerOpts);
 
@@ -139,14 +139,6 @@ $(document).keydown(function(e) {
             break;
          case 66: // b
             $("#bivar-filter-nav-link").click();
-            return false;
-            break;
-         case 77: // m
-            $("#multivar-filter-nav-link").click();
-            return false;
-            break;
-         case 83: // s
-            $("#sample-panels-nav-link").click();
             return false;
             break;
          case 79: // o

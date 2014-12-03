@@ -12,6 +12,7 @@ function activeCogListOutputApplyButton() {
          
          // make sure it is an option in uni, bi, multi, table
          $("#univar-var-" + curName).removeClass("hidden");
+         $("#map-var-" + curName).removeClass("hidden");
          $("#bivar-x-" + curName).removeClass("hidden");
          $("#bivar-y-" + curName).removeClass("hidden");
          $("#multivar-var-" + curName).removeClass("hidden");
@@ -35,6 +36,7 @@ function activeCogListOutputApplyButton() {
          
          // make sure it is not an option in uni, bi, multi, table
          $("#univar-var-" + curName).addClass("hidden").removeClass("active");
+         $("#map-var-" + curName).addClass("hidden").removeClass("active");         
          $("#bivar-x-" + curName).addClass("hidden").removeClass("active");
          $("#bivar-y-" + curName).addClass("hidden").removeClass("active");
          $("#multivar-var-" + curName).addClass("hidden").removeClass("active");
