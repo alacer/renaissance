@@ -1,0 +1,2 @@
+      Time       Date     Sample    Type  Sub Chan  Num	Aux
+[11:54:31.000 28/11/2009]  11154884     NA   3    3    0	*** V-FIB/TACH 

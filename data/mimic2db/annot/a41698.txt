@@ -1,0 +1,2 @@
+      Time       Date     Sample    Type  Sub Chan  Num	Aux
+[17:00:18.000 28/04/2017]  1247343     NA   3    1    0	***TACHY 123 >120
