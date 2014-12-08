@@ -70,10 +70,10 @@
     <!-- <div id="dummyDiv" class="shiny-text-output"></div> -->
     <div id="control-panel-backdrop" class="bd-hidden"></div>
     <div id="d3tooltip" class="hidden"></div>
-    <div id="resolution-alert" class="alert alert-danger alert-dismissable">
+   <!--  <div id="resolution-alert" class="alert alert-danger alert-dismissable">
       <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
       Warning! This application was not designed to be used at this window size / resolution.
-    </div>
+    </div> -->
     <!-- Fixed navbar -->
     <div class="navbar navbar-default navbar-fixed-top" role="navigation">
       <div class="container">
@@ -81,19 +81,19 @@
           <a class="navbar-brand" href="javascript:">Trelliscope Viewer</a>
           <div class="left-icons">
             <ul>
-              <a data-toggle="modal" data-target="#displayInfoModal" href="javascript:"><li><i class="icon-file-info"></i></li></a>
+<!--               <a data-toggle="modal" data-target="#displayInfoModal" href="javascript:"><li><i class="icon-file-info"></i></li></a> -->
               <span id="headerDisplayNameOutput" class="shiny-text-output"></span>
             </ul>
           </div>
           <div class="center-icons shiny-template-output" id="panelPageNavOutput" data-post-render="panelPageNavOutputPostRender">
           </div>
-          <div class="right-icons">
+<!--           <div class="right-icons">
             <ul>
               <a data-toggle="modal" data-target="#userModal" href="javascript:"><li><i class="icon-user"></i></li></a>
               <a data-toggle="modal" data-target="#openModal" href="javascript:"><li><i class="icon-folder-open"></i></li></a>
               <a data-toggle="modal" data-target="#aboutModal" href="javascript:"><li><i class="icon-info-circle"></i></li></a>
             </ul>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -106,6 +106,13 @@
             <img src="assets/images/logo.png">
           </div>
           <div class="list-group list-group-sidebar">
+
+
+            <a data-toggle="modal" data-target="#openModal" href="javascript:" class="list-group-item">
+              <i class="icon-folder-open"></i>
+            <span class="list-group-text">Open Display</span>
+            </a>
+
             <a href="javascript:" class="list-group-item active list-group-item-primary list-group-item-short">
             <span class="list-group-header">View Options</span>
             </a>
@@ -113,10 +120,10 @@
               <i class="icon-th"></i>
               <span class="list-group-text">Panel Layout</span>
             </a>
-            <a href="javascript:" class="list-group-item" data-divlink="panel-function" id="panel-function-nav-link">
+<!--             <a href="javascript:" class="list-group-item" data-divlink="panel-function" id="panel-function-nav-link">
               <i class="icon-panel-edit"></i>
               <span class="list-group-text">Panel Function</span>
-            </a>
+            </a> -->
             <a href="javascript:" class="list-group-item" data-divlink="panel-labels" id="panel-labels-nav-link">
                <!-- data-action="panelLabelListSetFromExposedState"> -->
               <i class="icon-cog-list"></i>
@@ -127,12 +134,12 @@
               <span class="list-group-text">&nbsp;Related Displays</span>
             </a>
             <a href="javascript:" class="list-group-item active list-group-item-primary list-group-item-short">
-              <span class="list-group-header">Cognostics</span>
+              <span class="list-group-header">Filters</span>
             </a>
             <a href="javascript:" class="list-group-item" data-divlink="active-cog" id="active-cog-nav-link">
                <!-- data-action="cogTableSetFromExposedState"> -->
               <i class="icon-active-cog"></i>
-              <span class="list-group-text">Active Cognostics</span>
+              <span class="list-group-text">Active Filters</span>
             </a>
             <a href="javascript:" class="list-group-item" data-divlink="cog-table-sort-filter" id="cog-table-sort-filter-nav-link">
                <!-- data-action="cogTableSetFromExposedState"> -->
@@ -144,19 +151,19 @@
               <i class="icon-bars"></i>
               <span class="list-group-text">Univariate Filter</span>
             </a>
-            <a href="javascript:" class="list-group-item" data-divlink="bivar-filter" id="bivar-filter-nav-link">
+            <a href="javascript:" class="list-group-item last-item" data-divlink="bivar-filter" id="bivar-filter-nav-link">
                <!-- data-action="bivarFilterSetFromExposedState"> -->
               <i class="icon-stats"></i>
               <span class="list-group-text">Bivariate Filter</span>
             </a>
-            <a href="javascript:" class="list-group-item" data-divlink="multivar-filter" id="multivar-filter-nav-link">
+<!--             <a href="javascript:" class="list-group-item" data-divlink="multivar-filter" id="multivar-filter-nav-link">
               <i class="icon-multivar"></i>
               <span class="list-group-text">Multivariate Filter</span>
             </a>
             <a href="javascript:" class="list-group-item last-item" data-divlink="sample-panels" id="sample-panels-nav-link">
               <i class="icon-sample"></i>
               <span class="list-group-text">Sample</span>
-            </a>
+            </a> -->
           </div>
         </div>
         <div id="panel-layout"          class="slide-panel panel panel-default"></div>
@@ -204,7 +211,7 @@
     </div>
   
   <!-- Modal -->
-  <div class="modal fade" id="displayInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <!-- <div class="modal fade" id="displayInfoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -217,13 +224,13 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <!-- <button type="button" class="btn btn-primary">Login</button> -->
-        </div>
+  <!--       </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- Modal -->
-  <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <!--  <div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -234,12 +241,12 @@
           Coming soon...
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
           <!-- <button type="button" class="btn btn-primary">Login</button> -->
-        </div>
+<!--         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   
   <!-- Modal -->
   <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -259,8 +266,9 @@
       </div>
     </div>
   </div>
+
   <!-- Modal -->
-  <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--   <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -375,7 +383,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <div id="related-layout-container" class="rl-layout" style="display: none"></div>
   <div class="related-layout-box rl-layout" id="box0" style="display: none">
     <div><span class="box-group-label"></span> / <span class="box-name-label"></span></div>

@@ -29,7 +29,7 @@ body {
   font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
 }
 
-@media(max-width: 900px) {
+/*@media(max-width: 900px) {
   #resolution-alert {
     font-family: "LatoBold","proxima-nova","Helvetica Neue",Arial,sans-serif !important;  
     position: absolute;
@@ -37,13 +37,13 @@ body {
     left: 10px;
     visibility: visible !important;
     z-index: 99999;
-  }
+  }*/
 /*  html {
     display: none;
   }*/
-}
+/*}*/
 
-@media(max-height: 600px) {
+/*@media(max-height: 600px) {
   #resolution-alert {
     font-family: "LatoBold","proxima-nova","Helvetica Neue",Arial,sans-serif !important;  
     position: absolute;
@@ -51,11 +51,11 @@ body {
     left: 10px;
     visibility: visible !important;
     z-index: 99999;
-  }
+  }*/
 /*  html {
     display: none;
   }*/
-}
+/*}*/
 
 
 :focus {outline:none !important;}
@@ -78,7 +78,7 @@ body > .container {
 .container>.navbar-header, .container-fluid>.navbar-header, .container>.navbar-collapse, .container-fluid>.navbar-collapse {
   width: 100%;
   text-align: center;
-  background-color: #fff;
+ /* background-color: #fff;*/
 }
 
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
@@ -139,12 +139,12 @@ body {
 
 #footer {
   width: 100%;
-  padding: 12px;
+  /*padding: 12px;*/
   color: rgba(255, 255, 255, 0.5);
-  border-top: 1px solid #0069a6;
+/*  border-top: 1px solid #0069a6;*/
   background: #004a89;
-
   position: fixed;
+  min-height: 36px;
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
@@ -584,6 +584,7 @@ Sliding Panel
   font-size: 18px;
   font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
   line-height: 50px;
+  margin-left: 5px
 }
 
 
@@ -1027,7 +1028,7 @@ td.select-column.active {
 }
 
 
-#resolution-alert {
+/*#resolution-alert {
   font-family: "LatoBold","proxima-nova","Helvetica Neue",Arial,sans-serif !important;  
   position: absolute;
   top: 10px;
@@ -1035,7 +1036,7 @@ td.select-column.active {
   visibility: hidden;
   z-index: 99999;
 }
-
+*/
 .tr-hover-table tr:hover {
   background-color: #efefef;
 }

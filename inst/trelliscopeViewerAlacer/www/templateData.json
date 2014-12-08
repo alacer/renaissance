@@ -7,7 +7,7 @@
 			"Panel Layout"
 		],
 		"panel_description" : [
-			"Specify the arrangement of the panels on each page by entering the number of rows and columns of panels per page.  Future functionality for fixing / varying levels of cognostics per page to come."
+			"Specify the arrangement of the panels on each page by entering the number of rows and columns of panels per page."
 		],
 		"body_id" : [
 			"panelLayoutOutput"
@@ -44,7 +44,7 @@
 			"Panel Labels"
 		],
 		"panel_description" : [
-			"Specify which cognostics to view underneath each panel. <br/>Select cognostics to view by clicking and/or dragging the 'Show' column."
+			"Specify which statistics to view underneath each panel. <br/>Select statistics to view by clicking and/or dragging the 'Show' column."
 		],
 		"body_id" : [
 			"panelLabelListOutput"
@@ -75,10 +75,10 @@
 			"icon-active-cog"
 		],
 		"panel_header" : [
-			"Active Cognostics"
+			"Active Filters"
 		],
 		"panel_description" : [
-			"Specify which cognostics are available for sorting, filtering, and sampling."
+			"Specify which filters are available for sorting, filtering, and sampling."
 		],
 		"body_id" : [
 			"activeCogListOutput"
@@ -92,10 +92,10 @@
 			"icon-sort-filter"
 		],
 		"panel_header" : [
-			"Cognostics View / Sort / Filter"
+			"Table View / Sort / Filter"
 		],
 		"panel_description" : [
-			"View cognostics in a table and specify sort order or filtering of panels.  <br/>Shift-click on the panel header sorting buttons for multi-column sorting."
+			"View summary statistics in a table and specify sort order or filtering of panels.  <br/>Shift-click on the panel header sorting buttons for multi-column sorting."
 		],
 		"body_id" : [
 			"cogTableControlsOutput"
@@ -112,7 +112,7 @@
 			"Visual Univariate Filter"
 		],
 		"panel_description" : [
-			"Filter panels based on a single cognostic guided by a visual display of the distribution of the cognostic.  <br/>Select a variable to view and click and drag on the display to specify filtering."
+			"Filter panels based on a single summary statistic guided by a visual display of the distribution of the statistic.  <br/>Select a variable to view and click and drag on the display to specify filtering."
 		],
 		"body_id" : [
 			"cogUniFilterControlsOutput"
@@ -129,7 +129,7 @@
 			"Visual Bivariate Filter"
 		],
 		"panel_description" : [
-			"Filter panels based on pairs of cognostics through an interactive scatterplot.  <br/>Currently only quantitative variables are supported."
+			"Filter panels based on pairs of summary statistics through an interactive scatterplot.  <br/>Currently only quantitative variables are supported."
 		],
 		"body_id" : [
 			"cogBiFilterControlsOutput"
