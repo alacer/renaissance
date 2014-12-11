@@ -10,3 +10,4 @@ vdb
 *.Rproj
 .RData
 *.RHistory
+.idea

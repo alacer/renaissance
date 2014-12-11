@@ -1,20 +1,19 @@
 // Contents of the file to be obfuscated.
-var input = null;
+var papaParseObject = null;
 
 // List of the names of the column headers 
 // Assumes the first row of the file has named headers)
 var fields = null;
 
+//List of actions to take on each column in the data
+//var actions = null;
+
 // HTML file object
 var file = null;
 
-// Records that contains personally
-// identifying information. These go into the "map" file.
-var piiData = [];
+//Keep track of fake values substituted for real values.
+var replacementDictionary = {};
 
-// Records that contain data -- information that is not 
-// anonymized. These go into the "data" file.
-var anonymousData = [];
 
 // This function accepts a list of files and loads the first 
 // one into memory as a Papa parse object.
@@ -42,14 +41,14 @@ function loadFile(files) {
         },
         complete: function (results) {
             // Set the global variables input and fields.
-            input = results;
-            fields = input.meta.fields;
+            papaParseObject = results;
+            fields = papaParseObject.meta.fields;
 
             //Create the instructions for what to do with the checkboxes
-            $('#instructions-anchor').append('<h4 style="padding-top:25px">Choose the columns to anonymize. Then scroll to bottom.</h4>');
+            $('#anchor-1').append('<h4 style="padding-top:25px">Choose the actions and then scroll to bottom.</h4>');
 
             //Create the check boxes for the column headers.
-            populateHeaderList()
+            createTableOfHeaders();
 
             //Reveal the anonymize button
             $('#anonymize-button').show();
@@ -57,75 +56,170 @@ function loadFile(files) {
     });
 }
 
-// Overly generic function to create a list of buttons with the names
-// of the column headers. Originally, you could set the primary key 
-// independent of the columns to be removed from the data set. 
-function populateHeaderList() {
+function createTableOfHeaders() {
 
-    // Grab the HTML element to use as a parent for the buttons
-    var div = document.getElementById('list-anchor');
+    //Create table element
+    var table = document.createElement('table');
+    table.setAttribute('class', 'table table-bordered');
 
-    //'Clear' the div element. Buttons do not appear if this is not executed.
-    div.innerHTML = '';
+    //Create table header
+    var header = table.createTHead();
 
-    // For each fields, create a button (radio or checkbox), a label with the
-    // name for the column header, and break to put each button on its own line.
+    // Create an empty <tr> element and add it to the first position of <thead>:
+    var row = header.insertRow(0);
+
+    // Insert a new cells (<td>)
+    var cell0 = row.insertCell(0);
+    var cell1 = row.insertCell(1);
+
+    // Add some  text
+    cell0.innerHTML = "Action";
+    cell1.innerHTML = "Column Header";
+
     fields.forEach(function (each) {
-        // create the necessary elements
-        var label = document.createElement("label");
-        var description = document.createTextNode(each);
-        var control = document.createElement("input");
-        control.type = "checkbox";
-        control.name = 'headers';      // give it a name we can check
-        control.setAttribute("header", each);
 
-        //Make the button and its description text children of the label.
-        label.appendChild(control);   // add the box to the element
-        label.appendChild(description);// add the description to the element
+        //Action column
+        var tdAction = document.createElement('td');
+        tdAction.className = 'table-bordered';
 
-        //Add the label element to the div and then a break.
-        div.appendChild(label);
-        div.appendChild(document.createElement("br"));
+        //Action drop-down list
+        var option1 = document.createElement("option");
+        var option2 = document.createElement("option");
+        var option3 = document.createElement("option");
+        option1.text = "Retain as-is";
+        option2.text = "Obfuscate";
+        option3.text = "Remove";
+        var ddList = document.createElement('SELECT');
+        ddList.name = "actions";
+        ddList.add(option1);
+        ddList.add(option2);
+        ddList.add(option3);
+
+        //Attach drop-down list to cell
+        tdAction.appendChild(ddList);
+
+        //Header column
+        var tdFieldName = document.createElement('td');
+        tdFieldName.className = 'table-bordered';
+        tdFieldName.appendChild(document.createTextNode(each));
+
+        //Attach cells to row
+        var tr = document.createElement('tr');
+        tr.appendChild(tdAction);
+        tr.appendChild(tdFieldName);
+
+        //Attach row to table
+        table.appendChild(tr);
     });
+
+    //Attach table to document
+    document.getElementById('anchor-2').appendChild(table);
 }
 
-// Return a list of strings that represent the column headers the user
-// selected.
-function getPiiHeaders() {
-    return _.chain(document.getElementsByName('headers'))
-        .select(function (element) { return element.checked})
-        .map(function (element) {return element.getAttribute('header')})
-        .value();
+
+function getActions() {
+    //Return an object whose keys are column headers and whose values are action strings.
+    var obj = {};
+    var controls = $("select");
+    for (var i = 0; i < fields.length; ++i) {
+        obj[fields[i]] = controls[i].value;
+    }
+    return obj;
 }
 
 // Populate the global data for the PII information and
 // the anonymized information.
-function createAnonData() {
-    var pii = getPiiHeaders();
-    _.each(input.data, function (row) {
-        piiRow = _.pick(row, pii);
-        anonRow = _.omit(row, pii);
-        piiRow.ANONYMOUS = anonRow.ANONYMOUS = getUUID();
-        piiData.push(piiRow);
-        anonymousData.push(anonRow);
-    });
+function createData(actions) {
+
+    //Get the raw, unanonymized data
+    var rawData = papaParseObject.data;
+
+    //Create a place to hold the key data and scrubbed data
+    var dataSets = {};
+    dataSets.key = [];
+    dataSets.scrubbed = [];
+
+    //Iterate over every row of the raw data.
+    var numRecords = rawData.length - 1;
+    for (var i = 0; i < numRecords; ++i) {
+
+        //For some reason Papa Parse always grabs an extra row.
+        //This code skips the last row.
+        if (i == numRecords - 1) {
+            console.log('SKIPPING LAST ROW ', rawData[i+1])
+            break;
+        }
+
+        //Get a handle on the row
+        var rawRow = rawData[i];
+
+        //Create hash to use as unique ID to link records in the key file
+        //to records in the scrubbed file.
+        var id = chance.hash();
+
+        //Create and add a field to both the key file and scrubbed file to permit later merge.
+        var scrubbedRow = {ANONYMOUS_ID: id};
+        var keyRow = {ANONYMOUS_ID: id};
+        dataSets.scrubbed.push(scrubbedRow);
+        dataSets.key.push(keyRow);
+
+        //Iterate through every field in the row.
+        for (var columnHeader in rawRow) {
+
+            //Pull out the requested action for the column
+            var theAction = actions[columnHeader];
+
+            //Pull out the actual value from the raw data
+            var realValue = rawRow[columnHeader];
+
+            //Obfuscate means to leave the column in the scrubbed data, but
+            //replace the values with garbage. A real value will always be replaced
+            //by the same fake value.
+            if (theAction == 'Obfuscate') {
+                //Copy the real value into the key file
+                keyRow[columnHeader] = realValue;
+
+                //Copy the fake value into the scrubbed file
+                scrubbedRow[columnHeader] = getFakeValue(realValue);
+            }
+
+            //The column should not appear in the scrubbed data, but the column should
+            //appear on the key data.
+            //NOTE: This could be pulled out of this loop with some rework.
+            if (theAction == 'Remove') {
+                keyRow[columnHeader] = realValue;
+            }
+
+            if (theAction == 'Retain as-is') {
+                scrubbedRow[columnHeader] = realValue;
+            }
+        } //End iterating over cells
+
+    }//End iterating over rows
+
+    return dataSets;
+
+}//End function
+
+function getFakeValue(realValue) {
+    //Replace the real value with a surrogate.
+    //Consult the replacement dictionary. If this value has been
+    //seen before, use the same replacement. Otherwise, add it
+    //to the replacement dictionary
+    var fakeValue = replacementDictionary[realValue];
+    if (!fakeValue) {
+        fakeValue = chance.word({syllables: 4});
+        replacementDictionary[realValue] = fakeValue;
+    }
+    return fakeValue;
 }
-// Create the PII and anonymous data sets, then save them as files.
+
 function anonymize() {
-    createAnonData();
+    //Create the key and scrubbed data sets and save them as files
+    var dataSets = createData(getActions());
     var type = {type: "text/plain;charset=utf-8"};
-    saveAs(new Blob([Papa.unparse(piiData)], type), "anonymous_map.csv");
-    saveAs(new Blob([Papa.unparse(anonymousData)], type), "anonymous_data.csv");
+    saveAs(new Blob([Papa.unparse(dataSets.key)], type), "key_file.csv");
+    saveAs(new Blob([Papa.unparse(dataSets.scrubbed)], type), "scrubbed_file.csv");
 }
-
-//Create a unique ID that has no relation to any of the original data.
-function getUUID() {
-    //Credit for this goes to http://stackoverflow.com/a/2117523/290962
-    return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
-
 
 
