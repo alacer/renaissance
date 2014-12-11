@@ -116,3 +116,87 @@ nonactionable$Date <- strptime(nonactionable$Date.x, format="%d/%m/%Y")
 nonactionable$DayHour <- paste(format(nonactionable$Time, "%H"), format(nonactionable$Date, "%d"), sep="-")
 
 save(nonactionable, file="nonactionabledata.RData")
+###############
+
+setwd("waveforms_02-02")
+filenames <- Sys.glob("*.csv")  # however you get the list of file
+allData02 <- lapply(filenames, function(.file){
+  data <- read.csv(.file, header=TRUE, stringsAsFactors=FALSE)
+  data$Patient <- substring(.file, 1, 6)
+  data$Hour <- "02-02"
+  data <- data[-1,]
+  datamelt <- melt(data, id=c("Patient", "X.Elapsed.time.", "Hour"))
+  datamelt$Time <- sub(".*?:", "", data$X.Elapsed.time.)
+  datamelt$Time <- strptime(datamelt$Time, format="%M:%OS'")  
+  data <- datamelt[,-2]
+  names(data) <- c("Patient", "Hour", "LeadSignal", "Value", "Time")
+  data$LeadSignal <- sub("X.", "", data$LeadSignal)
+  data$LeadSignal <- sub(".", "", data$LeadSignal)
+  data
+})
+
+setwd("../waveforms_14-29")
+filenames <- Sys.glob("*.csv")  # however you get the list of file
+allData14 <- lapply(filenames, function(.file){
+  data <- read.csv(.file, header=TRUE, stringsAsFactors=FALSE)
+  data$Patient <- substring(.file, 1, 6)
+  data$Hour <- "14-29"
+  data <- data[-1,]
+  datamelt <- melt(data, id=c("Patient", "X.Elapsed.time.", "Hour"))
+  datamelt$Time <- sub(".*?:", "", data$X.Elapsed.time.)
+  datamelt$Time <- strptime(datamelt$Time, format="%M:%OS'")  
+  data <- datamelt[,-2]
+  names(data) <- c("Patient", "Hour", "LeadSignal", "Value", "Time")
+  data$LeadSignal <- sub("X.", "", data$LeadSignal)
+  data$LeadSignal <- sub(".", "", data$LeadSignal)
+  data    # return the dataframe
+})
+
+
+alldata02 <- do.call(rbind, allData02)
+alldata14 <- do.call(rbind, allData14)
+
+save(alldata02, file="../alldata02.RData")
+save(alldata14, file="../alldata14.RData")
+
+
+#waveformdata <- rbind(alldata02, alldata14)
+
+
+# allDataList <- vector("list")
+# allDataList[[1]] <- vector("list")
+# allDataList[[1]]$key <- NA
+# allDataList[[1]]$data <- allData02[[1]]
+# counter <- 1
+# for(i in 2:length(allData02)){
+#   if(allData02[[i]]$Patient[1]==allData02[[i-1]]$Patient[1]){
+#   allDataList[[counter]]$key <- paste("Patient=",allData02[[i]]$Patient[1],"|Hour=",allData02[[i]]$Hour,sep="")
+#   allDataList[[counter]]$data <- rbind(allDataList[[counter]]$data, allData02[[i]]) 
+#   }
+#   if(allData02[[i]]$Patient[1]!=allData02[[i-1]]$Patient[1]){
+#   counter <- counter+1
+#   allDataList[[counter]] <- vector("list")
+#   allDataList[[counter]]$key <- paste("Patient=",allData02[[i]]$Patient[1],"|Hour=",allData02[[i]]$Hour,sep="")   
+#   allDataList[[counter]]$data <- allData02[[i]]
+#   }
+# }
+# counter <- counter+1
+# allDataList[[counter]] <- vector("list")
+# allDataList[[counter]]$key <- NA
+# allDataList[[counter]]$data <- allData14[[1]]
+# for(i in 2:length(allData14)){
+#   if(allData14[[i]]$Patient[1]==allData14[[i-1]]$Patient[1]){
+#   allDataList[[counter]]$key <- paste("Patient=",allData14[[i]]$Patient[1],"|Hour=",allData14[[i]]$Hour,sep="")
+#   allDataList[[counter]]$data <- rbind(allDataList[[counter]]$data, allData14[[i]]) 
+#   }
+#   if(allData14[[i]]$Patient[1]!=allData14[[i-1]]$Patient[1]){
+#   counter <- counter+1
+#   allDataList[[counter]] <- vector("list")
+#   allDataList[[counter]]$key <- paste("Patient=",allData14[[i]]$Patient[1],"|Hour=",allData14[[i]]$Hour,sep="")   
+#   allDataList[[counter]]$data <- allData14[[i]]
+#   }
+# }
+
+# waveformdata <- allDataList
+
+#save(waveformdata, file="../waveformdata.RData")
