@@ -11,7 +11,6 @@ library(reshape2)
 library(dplyr)
 library(shiny)
 
-
 load('668200205300414.RData')
 
 fan<-df[, c(
@@ -35,14 +34,16 @@ for (i in 1:numwindows) {
 fan$window <- as.factor(fan$window)
 
 
-sample.rate <- 0.1
+sample.rate <- 0.01
 sub <- fan[sample(nrow(fan), size = nrow(fan)* sample.rate) , ]
 sub <- sub[order(sub$variable, sub$sequence) , ]
 
 vdbConn("vdb", name="flightdata", autoYes = TRUE)
 
 bareBonesPanel <- function(x) {
-    xyplot(value~sequence, data=x, type='l')
+    xyplot(value~sequence, 
+       data=x, 
+       type='l'      
 }
 
 byEngine <- divide(sub, by = c("variable", "window"))

@@ -21,10 +21,10 @@ var anonymousData = [];
 function loadFile(files) {
 
     // If no file is selected, alert the user.
-	// The first check is to see if the user cancelled out of the 
-	// selection dialog without selecting a file. However, it is 
-	// OK to do that if a file was selected earlier and that is what 
-	// the second clause checks.
+    // The first check is to see if the user cancelled out of the
+    // selection dialog without selecting a file. However, it is
+    // OK to do that if a file was selected earlier and that is what
+    // the second clause checks.
     if (files.length < 1 && !file) {
         alert("Please choose at least one file to parse.");
         return
@@ -33,7 +33,7 @@ function loadFile(files) {
     //Set a globablly acessible variable.
     file = files[0];
 
-	//Attempt to convert the selected file into a JSON object.
+    //Attempt to convert the selected file into a JSON object.
     Papa.parse(file, {
         header: true,
         error: function (err, file) {
@@ -41,12 +41,18 @@ function loadFile(files) {
             alert('Error logged to console.')
         },
         complete: function (results) {
-			// Set the global variables input and fields.
+            // Set the global variables input and fields.
             input = results;
             fields = input.meta.fields;
-			
-			//Create the check boxes for the column headers. 
-            populateHeaderList('checkbox', '50px')
+
+            //Create the instructions for what to do with the checkboxes
+            $('#instructions-anchor').append('<h4 style="padding-top:25px">Choose the columns to anonymize. Then scroll to bottom.</h4>');
+
+            //Create the check boxes for the column headers.
+            populateHeaderList()
+
+            //Reveal the anonymize button
+            $('#anonymize-button').show();
         }
     });
 }
@@ -54,37 +60,26 @@ function loadFile(files) {
 // Overly generic function to create a list of buttons with the names
 // of the column headers. Originally, you could set the primary key 
 // independent of the columns to be removed from the data set. 
-function populateHeaderList(type, leftMarg, callback) {
+function populateHeaderList() {
 
-	// Grab the HTML element to use as a parent for the buttons
-    var div = document.getElementById('header-list');
-	
-	//Indent the list of buttons
-    div.style.marginLeft = leftMarg;
+    // Grab the HTML element to use as a parent for the buttons
+    var div = document.getElementById('list-anchor');
 
     //'Clear' the div element. Buttons do not appear if this is not executed.
     div.innerHTML = '';
 
-	// For each fields, create a button (radio or checkbox), a label with the 
-	// name for the column header, and break to put each button on its own line.
+    // For each fields, create a button (radio or checkbox), a label with the
+    // name for the column header, and break to put each button on its own line.
     fields.forEach(function (each) {
         // create the necessary elements
         var label = document.createElement("label");
         var description = document.createTextNode(each);
         var control = document.createElement("input");
-        control.type = type;    
+        control.type = "checkbox";
         control.name = 'headers';      // give it a name we can check
         control.setAttribute("header", each);
-		
-		// Function accepts an optional call back that is triggered when 
-		// user checks or clicks a button.
-        if (callback) {
-            control.onclick = function () {
-                callback(this);
-            };
-        }
 
-		//Make the button and its description text children of the label.
+        //Make the button and its description text children of the label.
         label.appendChild(control);   // add the box to the element
         label.appendChild(description);// add the description to the element
 

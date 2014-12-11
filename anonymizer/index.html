@@ -1,47 +1,87 @@
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html><!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]--><!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]--><!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]--><!--[if gt IE 8]><!-->
+<html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
+    <link rel="stylesheet" href="js/plugins/icheck/skins/minimal/blue.css" type="text/css"/>
+    <link rel="stylesheet" href="js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.css" type="text/css"/>
+    <link rel="stylesheet" href="css/App.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="http://cdn.datatables.net/1.10.4/css/jquery.dataTables.min.css">-->
+    <link rel="stylesheet" href="css/custom.css" type="text/css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    <!--CSV parser-->
+    <script src="js/papaparse.min.js"></script>
+    <!--Utilities-->
+    <script src="js/underscore-min.js"></script>
+    <!--Utilities-->
+    <script src="js/filesaver.min.js"></script>
+    <!--Application-->
+    <script src="js/main.js"></script>
+</head>
+<body>
+<!--[if lt IE 7]><p class="browsehappy">You are using an
+    <strong>outdated</strong> browser. Please<a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.
+</p><![endif]-->
+<header id="header">
+    <h1 id="site-logo">
+        <a href="dashboard.html"> <img src="img/logo.png" alt="Alacer"> </a>
+    </h1>
 
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+</header>
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+<div id="content">
 
-        <!--CSV parser-->
-        <script src="js/papaparse.min.js"></script>
+    <div id="content-header">
+        <h1>Alacer Data Anonymizer</h1>
+    </div>
+    <!-- #content-header -->
+    <div id="content-container">
 
-        <!--Utilities-->
-        <script src="js/underscore-min.js"></script>
-        <script src="js/filesaver.min.js"></script>
+        <!--Define file browser control-- Then hide the control because it is difficult--><!--to style. Create new button to trigger the filer browser and a new label to display file name.-->
+        <input type="file" id="files" style="display:none;" onchange="loadFile(this.files)"/>
 
-        <!--Application actions/Handlers/Custom JS-->
-        <script src="js/main.js"></script>
+        <h4>Choose a delimited text file to anonymize</h4>
 
+        <!-- Create visible button for the file input control. Cascade click event to file browser -->
+        <input id="browse-button" type="button" onclick="document.getElementById('files').click()" class="btn btn-primary" value="Browse files"/>
 
-    </head>
+        <div id="instructions-anchor"></div>
 
+        <div id="list-anchor"></div>
 
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+        <!--Button to start the anonymization process-->
+        <button style="margin-top: 25px" id="anonymize-button" type="button" class="btn btn-primary" onclick="anonymize()">Anonymize
+        </button>
 
-        <!-- Add your site or application content here -->
-        <p><b>Choose a delimited text file to anonymize.</b></p>
-        <input type="file" id="files" onchange="loadFile(this.files)">
-        <br><br>
-        <button type="button" onclick="anonymize()">Anonymize</button>
+    </div>
+    <!-- /#content-container -->
+</div>
 
-        <div id="header-list"></div>
-    
-    </body>
+<script src="js/libs/jquery-1.9.1.min.js"></script>
+<script src="js/libs/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="js/libs/bootstrap.min.js"></script>
+<script src="js/App.js"></script>
+
+<script src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+<!--<script src="//cdn.datatables.net/plug-ins/9dcbecd42ad/integration/bootstrap/3/dataTables.bootstrap.js"></script>-->
+<script src="js/plugins/datatables/DT_bootstrap.js"></script>
+<script src="js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
+<script src="js/plugins/icheck/jquery.icheck.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#anonymize-button').hide()
+    });
+</script>
+
+</body>
 </html>
