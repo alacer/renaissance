@@ -109,7 +109,7 @@ $(document).keydown(function(e) {
             pageForward();
             return false;
             break;
-         case 76: // l
+ /*        case 76: // l
             $("#panel-layout-nav-link").click();
             return false;
             break;
@@ -148,7 +148,7 @@ $(document).keydown(function(e) {
          case 73: // i
             $("#aboutModal").modal("show");
             return false;
-            break;
+            break;*/
       }
    } else if(slidePanel.length == 1) {
       if(e.keyCode == 27) // escape

@@ -18,6 +18,7 @@
     <!-- Custom styles -->
     <link href="assets/custom/custom.css" rel="stylesheet">
   	<link href="assets/icons/style.css" rel="stylesheet">
+    <link href="assets/font-awesome-4.2.0/css/font-awesome.min.css" rel="stylesheet">
     
     <script type="text/javascript" src="assets/jquery/jquery.js" ></script>
     <script type="text/javascript" src="assets/jquery.event.drag/jquery.event.drag-2.2.js" ></script>
@@ -45,7 +46,6 @@
     <script src="assets/crosslet/crosslet-min.js"></script>
 
     <!---------->    
-    
     <script src="assets/custom/d3footPlot.js"></script>
     <script src="assets/custom/d3uniFilter.js"></script>
     <script src="assets/custom/d3biFilter.js"></script>
@@ -118,6 +118,11 @@
           </div>
           <div class="list-group list-group-sidebar">
 
+            <a data-toggle="modal" data-target="#anonModal" href="javascript:" class="list-group-item">
+              <i class="fa fa-eraser"></i>
+            <span class="list-group-text">Anonymization Tool</span>
+            </a>            
+
             <a data-toggle="modal" data-target="#openModal" href="javascript:" class="list-group-item">
               <i class="icon-folder-open"></i>
             <span class="list-group-text">Open Display</span>
@@ -130,10 +135,10 @@
               <i class="icon-th"></i>
               <span class="list-group-text">Panel Layout</span>
             </a>
-            <a href="javascript:" class="list-group-item" data-divlink="panel-function" id="panel-function-nav-link">
+<!--             <a href="javascript:" class="list-group-item" data-divlink="panel-function" id="panel-function-nav-link">
               <i class="icon-panel-edit"></i>
               <span class="list-group-text">Panel Function</span>
-            </a>
+            </a> -->
             <a href="javascript:" class="list-group-item" data-divlink="panel-labels" id="panel-labels-nav-link">
                <!-- data-action="panelLabelListSetFromExposedState"> -->
               <i class="icon-cog-list"></i>
@@ -151,10 +156,10 @@
               <i class="icon-active-cog"></i>
               <span class="list-group-text">Active Filters</span>
             </a>            
-            <a href="javascript:" class="list-group-item" data-divlink="geo-filter" id="geo-filter-nav-link">
+<!--             <a href="javascript:" class="list-group-item" data-divlink="geo-filter" id="geo-filter-nav-link">
               <i class="icon-earth"></i>
               <span class="list-group-text">Geographic Filter</span>
-            </a>
+            </a> -->
             <a href="javascript:" class="list-group-item" data-divlink="cog-table-sort-filter" id="cog-table-sort-filter-nav-link">
                <!-- data-action="cogTableSetFromExposedState"> -->
               <i class="icon-sort-filter"></i>
@@ -173,9 +178,10 @@
           </div>
         </div>
         <div id="panel-layout"          class="slide-panel panel panel-default"></div>
-        <div id="panel-function"        class="slide-panel panel panel-default"></div>
+<!--         <div id="panel-function"        class="slide-panel panel panel-default"></div> -->
         <div id="panel-labels"          class="slide-panel panel panel-default"></div>
         <div id="add-related-display"   class="slide-panel panel panel-default"></div>
+        <div id="active-cog"            class="slide-panel panel panel-default"></div>        
         <div id="geo-filter"            class="slide-panel panel panel-default"></div>        
         <div id="cog-table-sort-filter" class="slide-panel panel panel-default"></div>
         <div id="univar-filter"         class="slide-panel panel panel-default"></div>
@@ -252,6 +258,26 @@
       </div>
     </div>
   </div> -->
+
+  <!-- Modal -->
+  <div class="modal fade" id="anonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<!--     <div id="displayLoadSpinner"></div> -->
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><i class="icon-times"></i></button>
+          <h4 class="modal-title" id="myModalLabel">Anonymize Data</h4>
+        </div>
+        <div class="modal-body">
+<!--           <div id="displayListOutput" class="shiny-template-output"></div>
+ -->        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   
   <!-- Modal -->
   <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
