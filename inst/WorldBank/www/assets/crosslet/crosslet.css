@@ -283,3 +283,9 @@
 .crosslet svg:hover .hover {
   display: inline;
 }
+
+#map{
+  height: 550px;
+  width: 100%;
+  border: 1px solid #999999;
+}

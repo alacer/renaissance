@@ -37,13 +37,18 @@
     <script src="assets/d3/vega.min.js"></script>
 
     <!--Add in Script files for crosslet and dependencies-->
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="assets/bootstrap-responsive/bootstrap-responsive.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="assets/crosslet/crosslet.css" />
+
     <script src="assets/leaflet/leaflet.js"></script>
     <script src="assets/jquery/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.js"></script>
     <script src="assets/underscore/underscore-min.js"></script>
     <script src="assets/d3/d3.v3.min.js"></script>
     <script src="assets/backbone/backbone-min.js"></script>
-    <script src="assets/crosslet/crosslet-min.js"></script>
+    <script src="assets/crosslet/crosslet.js"></script>
 
     <!---------->    
     <script src="assets/custom/d3footPlot.js"></script>
@@ -269,8 +274,51 @@
           <h4 class="modal-title" id="myModalLabel">Anonymize Data</h4>
         </div>
         <div class="modal-body">
-<!--           <div id="displayListOutput" class="shiny-template-output"></div>
- -->        </div>
+
+          <!--CSV parser-->
+          <script src="assets/anonymizer/js/papaparse.min.js"></script>
+          <!--Utilities-->
+          <script src="assets/anonymizer/js/underscore-min.js"></script>
+          <!--Utilities-->
+          <script src="assets/anonymizer/js/filesaver.min.js"></script>
+          <!--Application-->
+          <script src="assets/anonymizer/js/main.js"></script>
+          <!--Generate random data-->
+          <script src="assets/anonymizer/js/chance.min.js"></script>
+
+          <div id="content">
+            
+            <div id="content-container">
+
+              <!--Define file browser control-- Then hide the control because it is difficult--><!--to style. Create new button to trigger the filer browser and a new label to display file name.-->
+              <input type="file" id="files" style="display:none;" onchange="loadFile(this.files)"/>
+
+              <h4>Choose a delimited text file to anonymize</h4>
+
+              <!-- Create visible button for the file input control. Cascade click event to file browser -->
+              <input id="browse-button" type="button" onclick="document.getElementById('files').click()" class="btn btn-primary" value="Browse files"/>
+
+              <!--Placeholder for dynamic text-->
+              <div id="anchor-1"></div>
+
+              <!--Placeholder for dynamic text-->
+              <div id="anchor-2"></div>
+
+              <!--Button to start the anonymization process-->
+              <button style="margin-top: 25px" id="anonymize-button" type="button" class="btn btn-primary" onclick="anonymize()">Anonymize</button>
+            </div>
+          
+          </div>
+
+          <!--On ready code-->
+          <script>
+            $(document).ready(function () {
+              $('#anonymize-button').hide();
+            });
+          </script>
+
+        </div>
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
