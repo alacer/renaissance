@@ -157,22 +157,4 @@
 		"footer" : [
 			"Note: this interactive filter is not yet bound to the back-end - panels will not update when you click 'Apply'..."
 		]
-	},
-	"sample-panels" : {
-		"icon" : [
-			"icon-sample"
-		],
-		"panel_header" : [
-			"Sample Panels"
-		],
-		"panel_description" : [
-			"Specify how to sample from panels in their current sorted and filtered state (coming soon)."
-		],
-		"body_id" : [
-			"cogSampleControlsOutput"
-		],
-		"updateButton" : [
-			"cogSampleControlsApplyButton"
-		]
 	}
-}

@@ -8,16 +8,16 @@
     <meta name="author" content="">
     <link rel="shortcut icon" href="assets/ico/favicon.ico">
     
-    <title>Renaissance</title>
+    <title>Trelliscope Viewer</title>
     
     <!-- Bootstrap core CSS -->
     <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    
     <link href="assets/bootstrap-select/bootstrap-select.css" rel="stylesheet">
     
     <!-- Custom styles -->
     <link href="assets/custom/custom.css" rel="stylesheet">
   	<link href="assets/icons/style.css" rel="stylesheet">
-    <link href="assets/font-awesome-4.2.0/css/font-awesome.css" rel="stylesheet">
     
     <script type="text/javascript" src="assets/jquery/jquery.js" ></script>
     <script type="text/javascript" src="assets/jquery.event.drag/jquery.event.drag-2.2.js" ></script>
@@ -52,6 +52,8 @@
     <script src="shared/shiny.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="shared/shiny.css"/>
     <script src="assets/custom/shiny-trelliscope-io.js" type="text/javascript"></script>
+
+
 
     <!-- Testing -->
       <link rel="stylesheet" href="/assets/tests/qunit/qunit.css">
@@ -250,9 +252,8 @@
     </div>
   </div> -->
 
-  <!-- Modal -->
+    <!-- Modal -->
   <div class="modal fade" id="anonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div id="displayLoadSpinner"></div>
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -261,40 +262,40 @@
         </div>
         <div class="modal-body">
 
-<div id="content">
+          <!--CSV parser-->
+          <script src="assets/anonymizer/js/papaparse.min.js"></script>
+          <!--Utilities-->
+          <script src="assets/anonymizer/js/underscore-min.js"></script>
+          <!--Utilities-->
+          <script src="assets/anonymizer/js/filesaver.min.js"></script>
+          <!--Application-->
+          <script src="assets/anonymizer/js/main.js"></script>
+          <!--Generate random data-->
+          <script src="assets/anonymizer/js/chance.min.js"></script>
 
-    <div id="content-container">
+          <div id="content">
+            
+            <div id="content-container">
 
-        <!--Define file browser control-- Then hide the control because it is difficult--><!--to style. Create new button to trigger the filer browser and a new label to display file name.-->
-        <input type="file" id="files" style="display:none;" onchange="loadFile(this.files)"/>
+              Define file browser control-- Then hide the control because it is difficult--><!--to style. Create new button to trigger the filer browser and a new label to display file name.
+              <input type="file" id="files" style="display:none;" onchange="loadFile(this.files)"/>
 
-        <h4>Choose a delimited text file to anonymize</h4>
+              <h4>Choose a delimited text file to anonymize</h4>
 
-        <!-- Create visible button for the file input control. Cascade click event to file browser -->
-        <input id="browse-button" type="button" onclick="document.getElementById('files').click()" class="btn btn-primary" value="Browse files"/>
+              <!-- Create visible button for the file input control. Cascade click event to file browser -->
+              <input id="browse-button" type="button" onclick="document.getElementById('files').click()" class="btn btn-primary" value="Browse files"/>
 
-        <!--Placeholder for dynamic text-->
-        <div id="anchor-1"></div>
+              <!--Placeholder for dynamic text-->
+              <div id="anchor-1"></div>
 
-        <!--Placeholder for dynamic text-->
-        <div id="anchor-2"></div>
+              <!--Placeholder for dynamic text-->
+              <div id="anchor-2"></div>
 
-        <!--Button to start the anonymization process-->
-        <button style="margin-top: 25px" id="anonymize-button" type="button" class="btn btn-primary" onclick="anonymize()">Anonymize</button>
-    </div>
-</div>
-
-              <!-- Anonymizer -->
-    <!--CSV parser-->
-    <script src="assets/anonymizer/js/papaparse.min.js"></script>
-    <!--Utilities-->
-    <script src="assets/anonymizer/js/underscore-min.js"></script>
-    <!--Utilities-->
-    <script src="assets/anonymizer/js/filesaver.min.js"></script>
-    <!--Application-->
-    <script src="assets/anonymizer/js/main.js"></script>
-    <!--Generate random data-->
-    <script src="assets/anonymizer/js/chance.min.js"></script>
+              <!--Button to start the anonymization process-->
+              <button style="margin-top: 25px" id="anonymize-button" type="button" class="btn btn-primary" onclick="anonymize()">Anonymize</button>
+            </div>
+          
+          </div>
 
           <!--On ready code-->
           <script>
@@ -311,7 +312,6 @@
       </div>
     </div>
   </div>
-
   
   <!-- Modal -->
   <div class="modal fade" id="openModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -123,14 +123,6 @@ body > .container {
   min-width: 80%;
 }
 
-#anonModal {
- z-index: 10000 !important;
-}
-
-#anonModal .modal-dialog {
-  min-width: 80%;
-}
-
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

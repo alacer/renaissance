@@ -398,7 +398,6 @@ function panelTableContentOutputPostRender(data) {
       displayLoadSpinner.stop(target);
       // if it is spinning, open display modal is open
       $("#openModal").modal("hide");
-      $("#anonModal").modal("hide");      
    }
    
    // this is a hack right now
