@@ -11,7 +11,7 @@
     <title>Renaissance</title>
     
     <!-- Bootstrap core CSS -->
-    <link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="assets/bootstrap-select/bootstrap-select.css" rel="stylesheet">
     
     <!-- Custom styles -->
@@ -52,6 +52,16 @@
     <script src="shared/shiny.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="shared/shiny.css"/>
     <script src="assets/custom/shiny-trelliscope-io.js" type="text/javascript"></script>
+
+    <!-- crosslet -->
+    <script type="text/javascript" src="assets/custom/controls-geo-filter.js">
+    <script src="assets/leaflet/leaflet.js"></script>
+    <script src="assets/d3/d3.v3.min.js"></script>
+    <script src="assets/backbone/backbone-min.js"></script>
+    <script type="text/javascript" src="assets/crosslet/crosslet.js"></script>
+    <link href="assets/bootstrap-responsive/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="assets/crosslet/crosslet.css" />    
 
     <!-- Testing -->
       <link rel="stylesheet" href="assets/tests/qunit/qunit.css">
@@ -153,11 +163,16 @@
               <i class="icon-bars"></i>
               <span class="list-group-text">Univariate Filter</span>
             </a>
-            <a href="javascript:" class="list-group-item last-item" data-divlink="bivar-filter" id="bivar-filter-nav-link">
+            <a href="javascript:" class="list-group-item" data-divlink="bivar-filter" id="bivar-filter-nav-link">
                <!-- data-action="bivarFilterSetFromExposedState"> -->
               <i class="icon-stats"></i>
               <span class="list-group-text">Bivariate Filter</span>
             </a>
+            <a href="javascript:" class="list-group-item last-item" data-divlink="geo-filter" id="geo-filter-nav-link">
+               <!-- data-action="bivarFilterSetFromExposedState"> -->
+              <i class="fa fa-globe"></i>
+              <span class="list-group-text">Map Filter</span>
+            </a>            
 <!--             <a href="javascript:" class="list-group-item" data-divlink="multivar-filter" id="multivar-filter-nav-link">
               <i class="icon-multivar"></i>
               <span class="list-group-text">Multivariate Filter</span>
@@ -176,6 +191,7 @@
         <div id="cog-table-sort-filter" class="slide-panel panel panel-default"></div>
         <div id="univar-filter"         class="slide-panel panel panel-default"></div>
         <div id="bivar-filter"          class="slide-panel panel panel-default"></div>
+        <div id="geo-filter"          class="slide-panel panel panel-default"></div>
         <div id="multivar-filter"       class="slide-panel panel panel-default"></div>
         <div id="sample-panels"         class="slide-panel panel panel-default"></div>
 
@@ -496,7 +512,7 @@
   <!-- Bootstrap core JavaScript
   ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.js"></script>
 </body>
 
 
@@ -913,6 +929,17 @@
     </div>
   </div>
 </div>
+</script>
+
+<!-- geo filter template -->
+<script id="cogGeoFilterControlsOutput-template" type="text/html">
+/*<div class="panel-body-wrapper">*/ 
+<div class="container">
+      <div id="map">
+      </div>
+            Coming Soon...
+    </div>  
+/*</div>*/
 </script>
 
 <!-- multivariate filter template -->

@@ -138,6 +138,23 @@
 			"cogBiFilterControlsApplyButton"
 		]
 	},
+	"geo-filter" : {
+		"icon" : [
+			"fa fa-globe"
+		],
+		"panel_header" : [
+			"Map Filter"
+		],
+		"panel_description" : [
+			"Filter Geographic Locations By Variable Selection"
+		],
+		"body_id" : [
+			"cogGeoFilterControlsOutput"
+		],
+		"apply_button" : [
+			"cogGeoControlsApplyButton"
+		]		
+	},		
 	"multivar-filter" : {
 		"icon" : [
 			"icon-multivar"

@@ -1429,6 +1429,10 @@ text.axis-label {
   cursor: ne-resize;
 }
 
-
+#map{
+  height: 550px;
+  width: 100%;
+  border: 1px solid #999999;
+}
 /*
 ----------------------------------*/

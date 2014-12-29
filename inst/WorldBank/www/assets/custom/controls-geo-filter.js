@@ -1,3 +1,6 @@
+
+
+
 var axisf=function(){ return function(d){return Math.round(d*10)/10+"%";}};
 var yearsf =function(){ return Math.round};
 
@@ -12,7 +15,7 @@ var config = {
       zoom: 6
     },
     geo: {
-      url: "world.topo.json",
+      url: "assets/crosslet/data/world.topo.json",
       name_field: "NAME",
       id_field: "NAME",
       topo_object: "world"
@@ -27,7 +30,7 @@ var config = {
       title: "Corruption index",
       data: {
         colorscale: d3.scale.linear().domain([1, 10, 20]).range([ "red", "yellow","green"]).interpolate(d3.cie.interpolateLab),
-        dataSet: "data.tsv",
+        dataSet: "assets/crosslet/data/data.tsv",
         field: "corruption",
 
       },
@@ -42,7 +45,7 @@ var config = {
       title: "GDP per capita, $",
       data: {
         colorscale: d3.scale.linear().domain([1, 10, 20]).range([ "red", "yellow","green"]).interpolate(d3.cie.interpolateLab),
-        dataSet: "data.tsv",
+        dataSet: "assets/crosslet/data/data.tsv",
         field: "gdp",
         exponent:0.4,
         ticks: [2000,10000,25000,50000,80000]
@@ -61,7 +64,7 @@ var config = {
       title: "Gini coefficient",
       data: {
         //colorscale: d3.scale.linear().domain([1, 10, 20]).range([ "red", "yellow","green"]).interpolate(d3.cie.interpolateLab),
-        dataSet: "data.tsv",
+        dataSet: "assets/crosslet/data/data.tsv",
         field: "gini"
       },
     },
@@ -69,7 +72,7 @@ var config = {
       title: "Life expectancy, years",
       data: {
         colorscale: d3.scale.linear().domain([1, 10, 20]).range([ "red", "yellow","green"]).interpolate(d3.cie.interpolateLab),
-        dataSet: "data.tsv",
+        dataSet: "assets/crosslet/data/data.tsv",
         field: "life_expectancy",
         exponent: 2.4
       },
@@ -85,7 +88,7 @@ var config = {
       title: "Democracy Index",
       data: {
         colorscale: d3.scale.linear().domain([1, 10, 20]).range([ "red", "yellow","green"]).interpolate(d3.cie.interpolateLab),
-        dataSet: "data.tsv",
+        dataSet: "assets/crosslet/data/data.tsv",
         field: "democracy_2011",
       },
     },  
