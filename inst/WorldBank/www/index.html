@@ -115,10 +115,10 @@
           </div>
           <div class="list-group list-group-sidebar">
 
-            <a data-toggle="modal" data-target="#anonModal"  class="list-group-item">
+<!--             <a data-toggle="modal" data-target="#anonModal"  class="list-group-item">
               <i class="fa fa-eraser"></i>
             <span class="list-group-text">Anonymize Data</span>
-            </a>
+            </a> -->
 
             <a data-toggle="modal" data-target="#openModal" href="javascript:" class="list-group-item">
               <i class="icon-folder-open"></i>
@@ -191,7 +191,7 @@
         <div id="cog-table-sort-filter" class="slide-panel panel panel-default"></div>
         <div id="univar-filter"         class="slide-panel panel panel-default"></div>
         <div id="bivar-filter"          class="slide-panel panel panel-default"></div>
-        <div id="geo-filter"          class="slide-panel panel panel-default"></div>
+        <div id="geo-filter"            class="slide-panel panel panel-default"></div>
         <div id="multivar-filter"       class="slide-panel panel panel-default"></div>
         <div id="sample-panels"         class="slide-panel panel panel-default"></div>
 
@@ -266,7 +266,7 @@
     </div>
   </div> -->
 
-  <!-- Modal -->
+  <!-- Modal 
   <div class="modal fade" id="anonModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div id="displayLoadSpinner"></div>
     <div class="modal-dialog">
@@ -281,38 +281,27 @@
 
     <div id="content-container">
 
-        <!--Define file browser control-- Then hide the control because it is difficult--><!--to style. Create new button to trigger the filer browser and a new label to display file name.-->
-        <input type="file" id="files" style="display:none;" onchange="loadFile(this.files)"/>
+         <input type="file" id="files" style="display:none;" onchange="loadFile(this.files)"/>
 
         <h4>Choose a delimited text file to anonymize</h4>
 
-        <!-- Create visible button for the file input control. Cascade click event to file browser -->
         <input id="browse-button" type="button" onclick="document.getElementById('files').click()" class="btn btn-primary" value="Browse files"/>
 
-        <!--Placeholder for dynamic text-->
         <div id="anchor-1"></div>
 
-        <!--Placeholder for dynamic text-->
         <div id="anchor-2"></div>
 
-        <!--Button to start the anonymization process-->
         <button style="margin-top: 25px" id="anonymize-button" type="button" class="btn btn-primary" onclick="anonymize()">Anonymize</button>
     </div>
-</div>
+</div> -->
 
-              <!-- Anonymizer -->
-    <!--CSV parser-->
+              <!-- Anonymizer 
     <script src="assets/anonymizer/js/papaparse.min.js"></script>
-    <!--Utilities-->
     <script src="assets/anonymizer/js/underscore-min.js"></script>
-    <!--Utilities-->
     <script src="assets/anonymizer/js/filesaver.min.js"></script>
-    <!--Application-->
     <script src="assets/anonymizer/js/main.js"></script>
-    <!--Generate random data-->
     <script src="assets/anonymizer/js/chance.min.js"></script>
 
-          <!--On ready code-->
           <script>
             $(document).ready(function () {
               $('#anonymize-button').hide();
@@ -326,7 +315,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   
   <!-- Modal -->
