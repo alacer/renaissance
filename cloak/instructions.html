@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<head>
+    <!--META-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Alacer Data Cloak</title>
+    <meta name="description" content="">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+
+    <!--CSS-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,800italic,400,600,800" type="text/css">
+    <link rel="stylesheet" href="js/plugins/icheck/skins/minimal/blue.css" type="text/css"/>
+    <link rel="stylesheet" href="js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.css" type="text/css"/>
+    <link rel="stylesheet" href="css/App.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/custom.css" type="text/css"/>
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+</head>
+<body>
+<header id="header">
+    <h1 class=heading-inline id="site-logo">
+        <a href="dashboard.html"> <img src="img/logo.png" alt="Alacer"> </a>
+    </h1>
+
+</header>
+
+<div id="content">
+
+    <div id="content-header">
+        <h1>Alacer Data Cloak Instructions</h1>
+    </div>
+    <div id="content-container">
+
+<h2>Description</h2>
+ The Data Cloak takes a single input file and creates two output files. The input file contains sensitive data the data that needs to be cloaked before it can be shared. The two output files the cloaked data and the secret data file. The cloaked data is meant to be shared with others. The secret data file contains the sensitive information and can be used to reconstruct or uncloak data at a later point in time.
+ 
+<h2>Security</h2>
+The Data Cloak run entirely in the browser and does not send any secret data over the network. In fact, once the Data Cloak is started, the computer can be disconnected from the network and it will continue to run.
+
+The Data Cloak does not scramble values: it replaces values with randomly generated text. It is not possible for a third party to unscramble replaced values in the cloaked file without the secret file.
+
+<h2>Usage</h2>
+The Data Cloak asks the user to select a single file to cloak. It must be a text file with delimited data, such as a comma-separate-value (CSV) file. The file MUST contain a header row with the name of each column. 
+
+After a file is selected, the application lists the column names and the actions that can be performed on each one. The available actions are:
+<ul>
+<li><b>Retain as-is</b> The default action is to retain the data in the cloaked file. This information is not changed or obscured at all.</li>
+<li><b>Cloak</b> This action removes sensitive data. It replaces each value with a randomly generated string. If the real value of a field is "John Smith", then every occurrence of "John Smith" will be replaced with a new value, such as "tuleroll". The original data is written to the secret file.</li>
+<li><b>Remove</b> This action removes sensitive data. It excises the entire column from the cloaked data. The original data is written to the secret file.
+</ul>
+
+Select the "Cloak" button to create the cloaked file and the secret file. The browser may warn you that it wants to save multiple files to the file system. It is safe to allow this.
+    </div>
+</div>
+</body>

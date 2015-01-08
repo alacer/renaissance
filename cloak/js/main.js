@@ -1,4 +1,4 @@
-// Contents of the file to be obfuscated.
+// Contents of the file to be cloaked.
 var papaParseObject = null;
 
 // List of the names of the column headers 
@@ -29,7 +29,7 @@ function loadFile(files) {
         return
     }
 
-    //Set a globablly acessible variable.
+    //Set a globally accessible variable.
     file = files[0];
 
     //Attempt to convert the selected file into a JSON object.
@@ -50,8 +50,8 @@ function loadFile(files) {
             //Create the check boxes for the column headers.
             createTableOfHeaders();
 
-            //Reveal the anonymize button
-            $('#anonymize-button').show();
+            //Reveal the cloak button
+            $('#cloak-button').show();
         }
     });
 }
@@ -73,8 +73,8 @@ function createTableOfHeaders() {
     var cell1 = row.insertCell(1);
 
     // Add some  text
-    cell0.innerHTML = "Action";
-    cell1.innerHTML = "Column Header";
+    cell0.innerHTML = "Column Name";
+    cell1.innerHTML = "Action";
 
     fields.forEach(function (each) {
 
@@ -87,7 +87,7 @@ function createTableOfHeaders() {
         var option2 = document.createElement("option");
         var option3 = document.createElement("option");
         option1.text = "Retain as-is";
-        option2.text = "Obfuscate";
+        option2.text = "Cloak";
         option3.text = "Remove";
         var ddList = document.createElement('SELECT');
         ddList.name = "actions";
@@ -105,9 +105,9 @@ function createTableOfHeaders() {
 
         //Attach cells to row
         var tr = document.createElement('tr');
-        tr.appendChild(tdAction);
         tr.appendChild(tdFieldName);
-
+		tr.appendChild(tdAction);
+        
         //Attach row to table
         table.appendChild(tr);
     });
@@ -128,16 +128,16 @@ function getActions() {
 }
 
 // Populate the global data for the PII information and
-// the anonymized information.
+// the cloaked information.
 function createData(actions) {
 
-    //Get the raw, unanonymized data
+    //Get the raw, uncloaked data
     var rawData = papaParseObject.data;
 
-    //Create a place to hold the key data and scrubbed data
+    //Create a place to hold the key data and cloaked data
     var dataSets = {};
-    dataSets.key = [];
-    dataSets.scrubbed = [];
+    dataSets.secret = [];
+    dataSets.cloaked = [];
 
     //Iterate over every row of the raw data.
     var numRecords = rawData.length - 1;
@@ -154,14 +154,14 @@ function createData(actions) {
         var rawRow = rawData[i];
 
         //Create hash to use as unique ID to link records in the key file
-        //to records in the scrubbed file.
+        //to records in the cloaked file.
         var id = chance.hash();
 
-        //Create and add a field to both the key file and scrubbed file to permit later merge.
-        var scrubbedRow = {ANONYMOUS_ID: id};
-        var keyRow = {ANONYMOUS_ID: id};
-        dataSets.scrubbed.push(scrubbedRow);
-        dataSets.key.push(keyRow);
+        //Create and add a field to both the key file and cloaked file to permit later merge.
+        var cloakedRow = {CLOAK_ID: id};
+        var secretRow = {CLOAK_ID: id};
+        dataSets.cloaked.push(cloakedRow);
+        dataSets.secret.push(secretRow);
 
         //Iterate through every field in the row.
         for (var columnHeader in rawRow) {
@@ -172,29 +172,29 @@ function createData(actions) {
             //Pull out the actual value from the raw data
             var realValue = rawRow[columnHeader];
 
-            //Obfuscate means to leave the column in the scrubbed data, but
+            //Cloak means to leave the column in the output, but
             //replace the values with garbage. A real value will always be replaced
             //by the same fake value.
-            if (theAction == 'Obfuscate') {
+            if (theAction == 'Cloak') {
                 //Copy the real value into the key file
-                keyRow[columnHeader] = realValue;
+                secretRow[columnHeader] = realValue;
 
-                //Copy the fake value into the scrubbed file
-                scrubbedRow[columnHeader] = getFakeValue(realValue);
+                //Copy the fake value into the cloaked file
+                cloakedRow[columnHeader] = getFakeValue(realValue);
 
                 //Copy the fake value into the key file
-                keyRow[columnHeader + 'Obfuscated'] = getFakeValue(realValue);                
+                secretRow[columnHeader + 'Cloaked'] = getFakeValue(realValue);                
             }
 
-            //The column should not appear in the scrubbed data, but the column should
+            //The column should not appear in the cloaked data, but the column should
             //appear on the key data.
             //NOTE: This could be pulled out of this loop with some rework.
             if (theAction == 'Remove') {
-                keyRow[columnHeader] = realValue;
+                secretRow[columnHeader] = realValue;
             }
 
             if (theAction == 'Retain as-is') {
-                scrubbedRow[columnHeader] = realValue;
+                cloakedRow[columnHeader] = realValue;
             }
         } //End iterating over cells
 
@@ -217,12 +217,12 @@ function getFakeValue(realValue) {
     return fakeValue;
 }
 
-function anonymize() {
-    //Create the key and scrubbed data sets and save them as files
+function cloak() {
+    //Create the key and cloaked data sets and save them as files
     var dataSets = createData(getActions());
     var type = {type: "text/plain;charset=utf-8"};
-    saveAs(new Blob([Papa.unparse(dataSets.key)], type), "key_file.csv");
-    saveAs(new Blob([Papa.unparse(dataSets.scrubbed)], type), "scrubbed_file.csv");
+    saveAs(new Blob([Papa.unparse(dataSets.secret)], type), "secret_file.csv");
+    saveAs(new Blob([Papa.unparse(dataSets.cloaked)], type), "cloaked_file.csv");
 }
 
 
