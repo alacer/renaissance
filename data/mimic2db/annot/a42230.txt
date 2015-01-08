@@ -1,3 +1,0 @@
-      Time       Date     Sample    Type  Sub Chan  Num	Aux
-[12:15:33.000 29/05/2012]     7995     NA   3    3    0	***TACHY 160 >140
-[12:19:42.000 29/05/2012]    39120     NA   3    3    0	***TACHY 160 >140

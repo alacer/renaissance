@@ -1,3 +1,0 @@
-      Time       Date     Sample    Type  Sub Chan  Num	Aux
-[19:59:48.000 30/06/2012]  1885519     NA   3    3    0	*** V-FIB/TACH 
-[09:53:26.000 02/07/2012]  18937769     NA   3    3    0	*** ASYSTOLE 

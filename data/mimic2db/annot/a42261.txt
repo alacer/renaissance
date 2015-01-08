@@ -1,3 +1,0 @@
-      Time       Date     Sample    Type  Sub Chan  Num	Aux
-[21:42:06.000 01/07/2016]  1489972     NA   3    3    0	*** V-FIB/TACH 
-[21:42:14.000 01/07/2016]  1490972     NA   3    3    0	*** V-FIB/TACH 

@@ -1,2 +1,0 @@
-      Time       Date     Sample    Type  Sub Chan  Num	Aux
-[14:27:45.000 31/08/2012]   942226     NA   3    3    0	*** ASYSTOLE 

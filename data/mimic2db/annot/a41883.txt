@@ -1,3 +1,0 @@
-      Time       Date     Sample    Type  Sub Chan  Num	Aux
-[00:38:30.000 13/12/2008]   442908     NA   3    1    0	***BRADY 39 <40
-[02:24:11.000 13/12/2008]  1235533     NA   3    3    0	*** V-FIB/TACH 
