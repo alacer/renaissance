@@ -1,0 +1,3 @@
+      Time       Date     Sample    Type  Sub Chan  Num	Aux
+[14:13:52.000 23/03/2009]  17551353     NA   3    1    0	***BRADY 33 <40
+[14:14:36.000 23/03/2009]  17556853     NA   3    1    0	*** ASYSTOLE 

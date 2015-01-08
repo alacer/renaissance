@@ -1,0 +1,2 @@
+      Time       Date     Sample    Type  Sub Chan  Num	Aux
+[12:02:52.000 13/04/2012]    43238     NA   3    1    0	***BRADY 36 <40

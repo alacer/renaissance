@@ -1,0 +1,2 @@
+      Time       Date     Sample    Type  Sub Chan  Num	Aux
+[22:26:16.000 01/06/2011]  15982810     NA   3    3    0	*** V-TACH 
