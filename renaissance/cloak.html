@@ -15,10 +15,22 @@
 	<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />		
 	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />	
 	<link rel="stylesheet" href="js/libs/css/ui-lightness/jquery-ui-1.9.2.custom.css" type="text/css" />		
+    <link rel="stylesheet" href="js/plugins/icheck/skins/minimal/blue.css" type="text/css"/>
 
 	<link rel="stylesheet" href="css/App.css" type="text/css" />
 
 	<link rel="stylesheet" href="css/custom.css" type="text/css" />
+
+    <!--CSV parser-->
+    <script src="js/papaparse.min.js"></script>
+    <!--Utilities-->
+    <script src="js/underscore-min.js"></script>
+    <!--Utilities-->
+    <script src="js/filesaver.min.js"></script>
+    <!--Application-->
+    <script src="js/main.js"></script>
+    <!--Generate random data-->
+    <script src="js/chance.min.js"></script>	
 	
 </head>
 
@@ -63,21 +75,21 @@
 			</li>
 
 			<li class="">
-				<a href="prepare.html">
-					<i class="fa fa-edit"></i> 
+				<a>
+					<i class="fa fa-tasks"></i> 
 					Prepare
 				</a>
 			</li>			
 
 			<li class="">
-				<a href="analyze.html">
+				<a>
 					<i class="fa fa-bar-chart"></i> 
 					Analyze
 				</a>
 			</li>			
 
 			<li class="">
-				<a href="uncloak.html">
+				<a>
 					<i class="fa fa-key"></i> 
 					Uncloak
 				</a>
@@ -108,25 +120,6 @@
 
 		    	<ul class="dropdown-menu" role="menu">
 			        <li>
-			        	<a href="./page-profile.html">
-			        		<i class="fa fa-user"></i> 
-			        		&nbsp;&nbsp;My Profile
-			        	</a>
-			        </li>
-			        <li>
-			        	<a href="./page-calendar.html">
-			        		<i class="fa fa-calendar"></i> 
-			        		&nbsp;&nbsp;My Calendar
-			        	</a>
-			        </li>
-			        <li>
-			        	<a href="./page-settings.html">
-			        		<i class="fa fa-cogs"></i> 
-			        		&nbsp;&nbsp;Settings
-			        	</a>
-			        </li>
-			        <li class="divider"></li>
-			        <li>
 			        	<a href="index.html">
 			        		<i class="fa fa-sign-out"></i> 
 			        		&nbsp;&nbsp;Logout
@@ -151,14 +144,18 @@
 	
 		<nav id="sidebar">		
 			
-			<ul id="main-nav" class="open-active">			
-
-				<li class="">				
+			<ul id="main-nav" class="open-active">					
+		
+				<li class="">
 					<a href="cloak.html">
-						<i class="fa fa-key"></i>
-						Cloak
-					</a>				
+						Data Cloaker
+					</a>
 				</li>
+				<li class="">
+					<a href="cloak_instructions.html">
+						Instructions
+					</a>
+				</li>				
 						
 			</ul>
 					
@@ -178,12 +175,22 @@
 
 		<div id="content-container">
 
+	        <!--Define file browser control-- Then hide the control because it is difficult--><!--to style. Create new button to trigger the filer browser and a new label to display file name.-->
+	        <input type="file" id="files" style="display:none;" onchange="loadFile(this.files)"/>
 
-			
+	        <h4>Choose a file to cloak</h4>
 
-			
+	        <!-- Create visible button for the file input control. Cascade click event to file browser -->
+	        <input id="browse-button" type="button" onclick="document.getElementById('files').click()" class="btn btn-primary" value="Browse files"/>
 
+	        <!--Placeholder for dynamic text-->
+	        <div id="anchor-1"></div>
 
+	        <!--Placeholder for dynamic text-->
+	        <div id="anchor-2"></div>
+
+	        <!--Button to start cloaking-->
+	        <button style="margin-top: 25px" id="cloak-button" type="button" class="btn btn-primary" onclick="cloak()">Cloak</button>
 			
 		</div> <!-- /#content-container -->			
 		
@@ -205,6 +212,18 @@
 <script src="js/libs/bootstrap.min.js"></script>
 
 <script src="js/App.js"></script>
+
+<script src="js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="js/plugins/datatables/DT_bootstrap.js"></script>
+<script src="js/plugins/tableCheckable/jquery.tableCheckable.js"></script>
+<script src="js/plugins/icheck/jquery.icheck.min.js"></script>
+
+<!--On ready code-->
+<script>
+    $(document).ready(function () {
+        $('#cloak-button').hide();
+    });
+</script>
 
 </body>
 </html>
