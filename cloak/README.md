@@ -1,20 +1,4 @@
-## Alacer Data Anonymizer 
-
-### Description
- The Data Anonymizer takes a single input file and creates two output files. The input file is the data the data that needs to be anonymized. The two output files are a scrubbed data file and a key data file. The scrubbed data contains data that is anonymized, obfuscated, or otherwise redacted to a point where it is safe to share with a third party. The key data file contains information that must remain private, but can be linked to the anonymized records. The Data Anonymizer is a browser application that runs entirely on the client and saves the output information to the client's file system. No client data is sent over a network. 
-
-### Usage
-
-The application asks the user to select a single text file. The text file can be delimited with a comma or any other common delimiter. However, the text file MUST contain a header row with the name of each column. 
-
-After a file is selected, the application lists the column names and the actions that can be performed on each one. The action a user may select are:
-
-- The default action is to retain a column in the scrubbed data file. This information is not anonymized in anyway. 
-- The action "obfuscate" writes the column to the scrubbed data file, but replaces each value with a randomly generated string. If the real value of a field is "John Smith", then every occurrence of "John Smith" will be replaced with a new value, such as "tuleroll". The process is not reversible; it is not possible to recover "John Smith" from the obfuscated value "tuleroll". The "obfuscate" action also write the original, unobfuscated value is written to the key data file.
-- The action "remove" excises the entire column from the scrubbed data. The original column is written to the key data file.
-
-The Data Anonymizer creates a new column named "ANONYMOUS_ID" is added to both the scrubbed data file and the key data file. This is a primary/foreign key that can be used to uniquely merge every record in the scrubbed data to a record in the key data file. 
-After the user has selected actions for the anonymization process, the user scrolls to the bottom of the window and selects "Anonymize" the original data file is processed and two CSV files are saved to the client machine's file system. One file is named "scrubbed_file.csv" and the other is named "key_file.csv". The files are text files in the comma-separate-value format. Both files include a header row with the column names.
+## Alacer Data Cloak 
 
 ### Possible Enhancements
 
