@@ -89,6 +89,7 @@ function relatedLayout() {
    
    // find difference between total area and that of laying out
    // panels according to the different grid choices
+   console.log(previewWidth, previewHeight);
    var areaDiff = [];
    var totArea = previewWidth * previewHeight;
    for(var i = 0; i < grids.length; i++) {

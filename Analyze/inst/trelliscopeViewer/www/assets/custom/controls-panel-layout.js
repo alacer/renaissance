@@ -108,12 +108,13 @@ function getPanelDims(nRow, nCol, nCog) {
       var wExtra = 2 + 2 * tPad; // 2 for border + tPad on either side
       var hExtra = 2 + 2 * tPad + nCog * cogHeight; // 2 for border + tPad on top / bottom + cogHeight for every row of visible cognostics
       
+
       var pageWidth = $("#panelTableContentOutput").width();
       var pageHeight = $(window).height() -
          (51 + 7) - // header height + padding
          (32 + 7); // footer height + padding
       var pageAspect = pageHeight / pageWidth;
-      
+      console.log(pageWidth, pageHeight);      
       // first try stretching panels across full width:
       var newW = Math.round((pageWidth - (wExtra * nCol)) / nCol, 0);
       // given this, compute panel height
@@ -153,12 +154,12 @@ function panelLayoutPreview(nRow, nCol, nCog) {
    // var nRow = 2;
    // var nCol = 3;
    
-   if(nRow < 1) {
+   if(nRow < 1 | isNaN(nRow)) {
       nRow = 1;
       $("#panel-rows").val(1);
    }
 
-   if(nCol < 1) {
+   if(nCol < 1 | isNaN(nCol)) {
       nCol = 1;
       $("#panel-cols").val(1);      
    }
@@ -167,6 +168,7 @@ function panelLayoutPreview(nRow, nCol, nCog) {
    var previewHeight = 491; // this is the hard-coded height for control panels
    var previewAspect = previewHeight / previewWidth;
    
+   console.log(nRow, nCol, nCog, previewAspect, previewWidth, previewHeight);
    var pd = getPanelDims(nRow, nCol, nCog);
    
    if(pd.pageAspect < previewAspect) {

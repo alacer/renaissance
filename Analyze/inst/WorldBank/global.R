@@ -29,7 +29,7 @@ byCountrylong <- divide(allcountryriskmelt, by = c("country"), overwrite = TRUE,
 # )}
 # CogFunctions(byCountry[[1]][[2]])
 
-vdbConn("WorldBankvDec/vdb", autoYes = TRUE)
+vdbConn("WorldBankvJan/vdb", autoYes = TRUE)
 CogFunctions <- function(x) {list(
  # currentRiskMax = cog(x$value[x$year==2010 & x$model=="maxValue" & x$variable=="risk"], desc="Current Risk Level, Max Model"),
   currentRisk = cog(x$scaledvalue[x$year==max(x$year[x$model=="Risk Estimate"]) & x$model=="Risk Estimate" & x$variable=="risk"], desc="Current Risk Level"),
@@ -115,6 +115,7 @@ CogFunctions(byCountrylong[[1]][[2]])
 
 timePanelhc <- function(x){
   hp <- hPlot(value ~ year, data = x[x$variable=="risk",], type='line', group="model", radius=0)
+  hp$set(height=100)
   hp
 }
 timePanelhc(byCountrylong[[50]][[2]])
@@ -122,6 +123,7 @@ timePanelhc(byCountrylong[[50]][[2]])
 
 timePanelhcFactors <- function(x){
   hp <- hPlot(scaledvalue ~ year, data = x[x$model=="Risk Estimate",], type='line', group="variable", radius=0)
+  hp$set(height=100)
   hp
 }
 timePanelhcFactors(byCountrylong[[50]][[2]])
@@ -138,7 +140,7 @@ makeDisplay(byCountrylong,
             name = "Country_Risk_HighCharts",
             desc = "Country-Level Risk Ratings By Year, Testing Two Models",
             panelFn = timePanelhc, cogFn = CogFunctions,
-            width = 400, height = 400)
+            width = 200, height = 200)
 makeDisplay(byCountrylong,
             name = "Country_Risk_Components",
             desc = "Country-Level Risk Components By Year",

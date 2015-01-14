@@ -69,14 +69,14 @@ function debounce(fn, delay) {
 // console.error = console.debug = console.info =  console.log;
 
 // let a user resize for 250ms before triggering actions
-$(window).resize(function() {
+$("#panelTableContentOutput").resize(function() {
    if(this.resizeTO) clearTimeout(this.resizeTO);
    this.resizeTO = setTimeout(function() {
       $(this).trigger('resizeEnd');
    }, 250);
 });
 
-$(window).bind('resizeEnd', function() {
+$("#panelTableContentOutput").bind('resizeEnd', function() {
    // recompute the panel preview layout after window resize
    // TODO: if that control panel is open, only change it there
    

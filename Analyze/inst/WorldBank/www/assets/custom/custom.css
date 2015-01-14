@@ -25,9 +25,9 @@ strong {
   font-weight: normal !important;
 }
 
-body {
+/*body {
   font-family: "Lato","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
-}
+}*/
 
 /*@media(max-width: 900px) {
   #resolution-alert {
@@ -63,6 +63,7 @@ body {
 
 body > .container {
   padding: 50px 0 0 0;
+  height: 100% !important;
 }
 
 #footer > .container {
@@ -71,7 +72,7 @@ body > .container {
 }
 
 .container {
-  width: 100%;
+  width: 100% !important;
   padding: 0;
 }
 
@@ -80,6 +81,8 @@ body > .container {
   text-align: center;
  /* background-color: #fff;*/
 }
+
+
 
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
   margin-left: 0px;
@@ -142,7 +145,6 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 35px;
   overflow: hidden;
-  background-color: white;
 }
 
 #footer {
@@ -165,7 +167,7 @@ body {
 /* Sidebar
 -------------------------------------------------- */
 
-#logo {
+/*#logo {
   height: 150px;
   background: #0069a6;
   border-bottom: 35px solid #004a89;
@@ -181,11 +183,11 @@ body {
   padding-left: 205px;
   height: auto !important;
   margin-bottom: -35px;
-}
+}*/
 
 
-#sidebar-wrapper {
-  position: absolute;
+/*#sidebar-wrapper {
+  position: relative;
   z-index: 9999;
   width: 190px;
   height: 100%;
@@ -193,14 +195,34 @@ body {
   left: 0;
   overflow-y: auto;
   background-color: #444;
-}
-
-/*#wrapper .slide-panel .slide-left > #page-content-wrapper {
-  background-color: rgba(0,0,0,0.25);
-  cursor: pointer;
 }*/
 
-.sidebar-nav {
+#sidebar-wrapper {
+
+  width: 240px;
+  display: block;
+  float: left;
+  position: relative;
+  position: absolute;
+  z-index: 16;
+padding: 0;
+border-top: 1px solid #4A4A4A;
+border-bottom: 1px solid #6c6e73;
+margin-top: 22.5px;
+}
+
+#sidebar-wrapper hr {
+  margin-bottom: 2em;
+  border-top: 1px solid #4A4A4A;
+  border-bottom: 1px solid #858585;
+}
+
+#wrapper .slide-panel .slide-left > #page-content-wrapper {
+  background-color: rgba(0,0,0,0.25);
+  cursor: pointer;
+}
+
+/*.sidebar-nav {
   position: absolute;
   top: 0;
   width: 180px;
@@ -208,13 +230,13 @@ body {
   margin: 0;
   padding: 0;
 }
-
-#sidebar-wrapper a.list-group-item {
+*/
+/*#sidebar-wrapper a.list-group-item {
 
   background-color: transparent;
- /* border-left: 2px solid transparent;*/
-/*  text-transform: uppercase;*/
-/*  font-weight: bold;*/
+  border-left: 2px solid transparent;
+  text-transform: uppercase;
+  font-weight: bold;
 
   height: 38px;
   margin: 0px 0px;
@@ -266,12 +288,12 @@ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
   left:5px;
 }
 
-/*.list-group-item-short {
+.list-group-item-short {
    padding-bottom: 6px !important; 
    padding-top: 6px !important; 
-}*/
+}
 
-/*#sidebar-wrapper a.list-group-item.active, #sidebar-wrapper a.list-group-item.active:hover, #sidebar-wrapper a.list-group-item.active:focus {
+#sidebar-wrapper a.list-group-item.active, #sidebar-wrapper a.list-group-item.active:hover, #sidebar-wrapper a.list-group-item.active:focus {
   border-top: 3px solid #293241;
   background-color: transparent;
   border-left: none;
@@ -283,13 +305,13 @@ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
   padding-top: 15px;
   margin-bottom: 11px;
   height: 37px;
-}*/
+}
 
-/*#sidebar-wrapper a.list-group-item:hover, a.list-group-item:focus {
+#sidebar-wrapper a.list-group-item:hover, a.list-group-item:focus {
   background-color: #background: #6c6e73;
   border-left: 2px solid #15a4fa;
   color: white;
-}*/
+}
 
 #sidebar-wrapper a.list-group-item.selected {
    background-color: white;
@@ -297,10 +319,77 @@ text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
    text-shadow: none;
 }
 
-/*#sidebar-wrapper .list-group-item.last-item {
+#sidebar-wrapper .list-group-item.last-item {
   margin-bottom: 5px;
   height: 37px;
+}
+*/
+
+/*#sidebar-wrapper > li {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  border-top: none;
+  border-bottom: 1px solid #444547;
 }*/
+
+
+#sidebar-wrapper .list-group{
+  margin: 0px;
+}
+
+#sidebar-wrapper a.list-group-item {
+  background: #55565a;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+  border: none;
+  border-bottom: 1px solid #444547;
+  width: 100%;
+  font-size: 14px;
+  font-weight: normal;
+  text-decoration: none;
+  color: #FFF;
+  display: inline-block;
+  padding: 11px 18px 11px 18px;
+  outline: none;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.25);
+}
+#sidebar-wrapper a.list-group-item i {
+  position: relative;
+  top: 1px;
+  width: 16px;
+  display: inline-block;
+  text-align: center;
+  margin-right: 1em;
+  color: #333;
+  font-size: 16px;
+  text-shadow: none;
+}
+#sidebar-wrapper a.list-group-item:hover {
+  background: #6c6e73;
+}
+
+#sidebar-wrapper a.list-group-item:active {
+  background: #066ECD;
+  background-image: -webkit-gradient(linear, left 0%, left 100%, from(#ffffff), to(#ffffff));
+  background-image: -webkit-linear-gradient(top, #ffffff, 0%, #ffffff, 100%);
+  background-image: -moz-linear-gradient(top, #ffffff 0%, #ffffff 100%);
+  background-image: linear-gradient(to bottom, #ffffff 0%, #ffffff 100%);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff', endColorstr='#ffffffff', GradientType=0);
+  border-top: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.075);
+  color: #0069a6;
+  text-shadow: none;
+  font-weight: 600;
+}
+
 
 /* Right Sticky
 -------------------------------------------------- */
@@ -432,7 +521,7 @@ Sliding Panel
 
 #control-panel-backdrop {
   position: fixed;
-  left: 190px;
+  left: 240px;
   bottom: 32px;
   width:100%;
   height: 100%;
@@ -454,8 +543,8 @@ Sliding Panel
 
 .slide-panel {
   position: absolute;
-  top: 15px;
-  left: 180px;
+  top: 85px;
+  left: 240px;
   margin-left: -2000px;
   background-color: #fff;
  /* height: 690px;*/
@@ -1001,9 +1090,15 @@ td.select-column.active {
   text-align: center !important;
 }
 
-.panel-body-wrapper {
+/*.panel-body-wrapper {
   width: 780px;
   max-height: 500px;
+  margin: 0 auto;
+}*/
+
+.panel-body-wrapper {
+  width: 100%;
+  max-height: 100%;
   margin: 0 auto;
 }
 
@@ -1152,9 +1247,10 @@ button#btn-cog-table-reset.btn.btn-danger {
   position: relative;
   width: 100%;
   height: 100%;
-  margin-top: 7px;
+  margin-top: -110px;
 /*  margin-right: 10px;*/
   margin-left: -7px;
+  margin-bottom: 0px;
 /*  border: 1px solid black;*/
 }
 
