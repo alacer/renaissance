@@ -128,6 +128,12 @@ timePanelhcFactors <- function(x){
 }
 timePanelhcFactors(byCountrylong[[50]][[2]])
 
+
+timePanelnormal <- function(x){
+  plot(y=x$value[x$variable=="risk"], x=x$year[x$variable=="risk"], type='l')
+}
+timePanelhcFactors(byCountrylong[[50]][[2]])
+
 # # add display panel and cog function to vdb
 # makeDisplay(byCountry,
 #             name = "Country_Risk_HighCharts_v3",
@@ -146,6 +152,11 @@ makeDisplay(byCountrylong,
             desc = "Country-Level Risk Components By Year",
             panelFn = timePanelhcFactors, cogFn = CogFunctions,
             width = 400, height = 400)
+makeDisplay(byCountrylong,
+    name = "Country_risk_normalplot",
+    desc = "Normal Plot",
+    panelFn = timePanelnormal, cogFn = CogFunctions,
+    width=400, height=400)
 
 # runApp("c:/users/kristan/documents/github/trelliscope/inst/worldbank", 
 #   launch.browser=TRUE)

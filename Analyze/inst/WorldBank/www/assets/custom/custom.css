@@ -20,6 +20,21 @@
 
 /*Custom CSS*/
 
+
+/*#panelTableContentOutput > table > tbody > tr > td > 
+  table.panel-table-wrapper > tbody > tr > td > div > div > div > 
+  iframe > #document > html > body > div > .highcharts-container {
+  zoom: .7 !important;
+}*/
+
+.rChart{
+  zoom: .7 !important;
+}
+
+.panel-table-wrapper{
+  zoom: .7;
+}
+
 strong {
   font-family: "LatoBold","proxima-nova","Helvetica Neue",Arial,sans-serif !important;
   font-weight: normal !important;
